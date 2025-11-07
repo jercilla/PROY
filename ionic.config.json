@@ -1,0 +1,7 @@
+{
+  "name": "trending-content-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

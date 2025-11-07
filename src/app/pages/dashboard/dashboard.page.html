@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToSettings()">
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHistory()">
+        <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-chip color="warning">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <ion-label>{{ currentDate }}</ion-label>
+  </ion-chip>
+
+  <ion-text>
+    <h2>Bienvenido {{ userName }}</h2>
+  </ion-text>
+
+  <swiper-container [slidesPerView]="1" [pagination]="true">
+    <swiper-slide *ngFor="let news of trendingNews">
+      <app-trend-card [news]="news"></app-trend-card>
+    </swiper-slide>
+  </swiper-container>
+
+  <ion-button expand="block" (click)="goToDetail()">
+    Detalles
+  </ion-button>
+
+  <ion-button expand="block" (click)="goToNew()">
+    Crear
+  </ion-button>
+
+  <ion-text color="medium" class="ion-text-center">
+    <p>
+      <small>Last update {{ lastUpdate }}</small>
+      <ion-icon name="refresh-outline" (click)="refreshCards()"></ion-icon>
+    </p>
+  </ion-text>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-content class="ion-padding ion-text-center">
+  <ion-card>
+    <ion-card-header>
+      <ion-segment [(ngModel)]="isLogin">
+        <ion-segment-button [value]="true">
+          <ion-label>Iniciar Sesión</ion-label>
+        </ion-segment-button>
+        <ion-segment-button [value]="false">
+          <ion-label>Registrarse</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-card-subtitle>{{ isLogin ? 'Bienvenido de nuevo' : 'Únete a nosotros' }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-input
+            label="Correo electrónico"
+            label-placement="floating"
+            type="email"
+            [(ngModel)]="email">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input
+            label="Contraseña"
+            label-placement="floating"
+            type="password"
+            [(ngModel)]="password">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button
+        expand="block"
+        (click)="onSubmit()"
+        [disabled]="!email || !password">
+        {{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}
+      </ion-button>
+
+      <ion-text color="primary" *ngIf="isLogin">
+        <p><small>¿Olvidaste tu contraseña?</small></p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="medium">
+    <p><small>Al continuar, aceptas nuestros términos y condiciones</small></p>
+  </ion-text>
+</ion-content>

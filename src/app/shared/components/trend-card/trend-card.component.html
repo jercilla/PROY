@@ -1,0 +1,11 @@
+<ion-card (click)="goToDetail()">
+  <ion-card-header>
+    <ion-card-subtitle>{{ news.category }}</ion-card-subtitle>
+    <ion-card-title>{{ news.title }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-text color="medium">
+      <p>{{ news.description }}</p>
+    </ion-text>
+  </ion-card-content>
+</ion-card>

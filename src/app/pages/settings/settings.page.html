@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>Configuración</h2>
+        <p>Ajustes de la aplicación</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="danger" (click)="logout()">
+    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    Cerrar Sesión
+  </ion-button>
+</ion-content>
