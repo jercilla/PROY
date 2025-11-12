@@ -1,1 +1,56 @@
-// Placeholder
+// Estilos básicos para la página Content Creator
+
+.controls-section {
+  margin: 20px 0;
+}
+
+.control-item {
+  margin-bottom: 20px;
+
+  ion-label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .range-value {
+    margin-top: 5px;
+    text-align: right;
+    font-size: 0.9em;
+  }
+
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+  }
+}
+
+ion-button[expand="block"] {
+  margin: 20px 0;
+}
+
+.resultado-section {
+  margin-top: 30px;
+
+  h3 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .resultado-textarea {
+    min-height: 150px;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 10px;
+
+    ion-button {
+      flex: 1;
+      max-width: 120px;
+    }
+  }
+}

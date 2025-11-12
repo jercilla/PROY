@@ -3,12 +3,96 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/dashboard"></ion-back-button>
     </ion-buttons>
-    <ion-title>New</ion-title>
+    <ion-title>Content Creator</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-text>
-    <p>new works!</p>
-  </ion-text>
+  <!-- Tarjeta de Tendencia -->
+  <ion-card>
+    <ion-card-content>
+      <h2>{{ trendTitle }}</h2>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Controles de Generación -->
+  <div class="controls-section">
+    <!-- Control de Longitud -->
+    <div class="control-item">
+      <ion-label>Longitud</ion-label>
+      <ion-range
+        [(ngModel)]="longitud"
+        min="50"
+        max="500"
+        pin="true"
+        [pinFormatter]="pinFormatter">
+      </ion-range>
+      <ion-text color="medium">
+        <p class="range-value">{{ longitud }} car.</p>
+      </ion-text>
+    </div>
+
+    <!-- Control de Tono -->
+    <div class="control-item">
+      <ion-label>Tono</ion-label>
+      <ion-range
+        [(ngModel)]="tono"
+        min="0"
+        max="100">
+      </ion-range>
+      <ion-text color="medium">
+        <p class="range-value">{{ getTonLabel() }}</p>
+      </ion-text>
+    </div>
+
+    <!-- Toggle Hashtag -->
+    <div class="control-item">
+      <ion-item lines="none">
+        <ion-label>Hashtag</ion-label>
+        <ion-toggle [(ngModel)]="hashtag" slot="end"></ion-toggle>
+      </ion-item>
+    </div>
+
+    <!-- Toggle Emoji -->
+    <div class="control-item">
+      <ion-item lines="none">
+        <ion-label>Emoji</ion-label>
+        <ion-toggle [(ngModel)]="emoji" slot="end"></ion-toggle>
+      </ion-item>
+    </div>
+  </div>
+
+  <!-- Botón Generar -->
+  <ion-button expand="block" (click)="generar()">
+    Generar
+  </ion-button>
+
+  <!-- Sección de Resultado -->
+  <div class="resultado-section" *ngIf="mostrarResultado">
+    <h3>Resultado,</h3>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-textarea
+          [(ngModel)]="resultado"
+          [readonly]="!modoEdicion"
+          rows="8"
+          class="resultado-textarea">
+        </ion-textarea>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botones de Acción -->
+    <div class="action-buttons">
+      <ion-button shape="round" (click)="editar()">
+        Editar
+      </ion-button>
+      <ion-button shape="round" (click)="copiar()">
+        Copiar
+      </ion-button>
+      <ion-button shape="round" (click)="guardar()">
+        Guardar
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
