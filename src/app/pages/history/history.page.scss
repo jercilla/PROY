@@ -1,0 +1,47 @@
+// Estilos básicos para la página History
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+
+  .greeting {
+    flex: 1;
+    font-size: 1.3em;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+
+    em {
+      font-style: italic;
+      font-weight: 700;
+    }
+  }
+
+  .filter-icon {
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 15px;
+    flex-shrink: 0;
+  }
+}
+
+ion-list {
+  background: transparent;
+  padding: 0;
+}
+
+.history-card {
+  margin-bottom: 15px;
+
+  .fecha {
+    font-size: 0.85em;
+    margin: 0 0 8px 0;
+  }
+
+  .texto {
+    margin: 0;
+    line-height: 1.5;
+  }
+}

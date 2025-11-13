@@ -8,7 +8,28 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-text>
-    <p>history works!</p>
-  </ion-text>
+  <!-- Saludo personalizado -->
+  <div class="header-section">
+    <h2 class="greeting">
+      Hola <em>{{ userName }}</em>,<br>
+      esto es lo que has publicado hasta ahora:
+    </h2>
+    <ion-icon
+      name="funnel-outline"
+      class="filter-icon"
+      (click)="abrirFiltros()">
+    </ion-icon>
+  </div>
+
+  <!-- Lista de historial -->
+  <ion-list>
+    <ion-card *ngFor="let item of historyItems" class="history-card">
+      <ion-card-content>
+        <ion-text color="medium">
+          <p class="fecha">{{ item.fecha }}</p>
+        </ion-text>
+        <p class="texto">{{ item.texto }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
