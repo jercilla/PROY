@@ -17,6 +17,8 @@ Esta aplicación permite a los usuarios:
 - **Angular 20** - Framework frontend con componentes standalone
 - **TypeScript** - Lenguaje de programación
 - **Swiper** - Componente de carrusel para las tarjetas trending
+- **Supabase** - Backend como servicio (opcional para autenticación y base de datos)
+
 
 ## Requisitos Previos
 
@@ -32,8 +34,12 @@ Esta aplicación permite a los usuarios:
 ```bash
 npm install
 ```
+3. Instalar Supabase:
+```bash
+npm install @supabase/supabase-js
+```
 
-3. Instalar Ionic CLI globalmente (si no lo tienes instalado):
+4. Instalar Ionic CLI globalmente (si no lo tienes instalado):
 ```bash
 npm install -g @ionic/cli
 ```
