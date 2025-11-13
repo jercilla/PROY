@@ -13,6 +13,7 @@ import { AuthService } from '../../core/services/auth';
   imports: [CommonModule, FormsModule, IonicModule]
 })
 export class LoginPage  implements OnInit {
+
   email: string = '';
   password: string = '';
   isLogin: boolean = true;
@@ -22,7 +23,7 @@ export class LoginPage  implements OnInit {
     private router: Router,
     private loadingController: LoadingController,
     private toastController: ToastController
-  ) { }
+  ) {  }
 
   ngOnInit() {
     // Si ya está autenticado, redirigir al dashboard
@@ -51,21 +52,40 @@ export class LoginPage  implements OnInit {
     try {
       if (this.isLogin) {
         const success = await this.authService.login(this.email, this.password);
+        await loading.dismiss();
         if (success) {
-          await loading.dismiss();
           await this.showToast('Bienvenido!', 'success');
           this.router.navigate(['/dashboard']);
+        }else{
+          await this.showToast('Credenciales inválidas', 'danger');
         }
       } else {
-        // Mock registro - por ahora solo simula el proceso
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await loading.dismiss();
-        await this.showToast('Cuenta creada exitosamente. Ahora puedes iniciar sesión.', 'success');
+        await this.authService.signup(this.email, this.password);
+        await this.showToast('Registro realizado. Revisa tu email para verificar tu cuenta.', 'success');
         this.isLogin = true;
       }
     } catch (error) {
+
+      console.error('Error inesperado:', error);
+      let errorMessage = 'Error desconocido. Intenta nuevamente.';
+
+      // Verificamos si hay un error de Supabase y cuál es
+      if (error && typeof error === 'object' && 'message' in error) {
+        const message = (error as { message: string }).message.toLowerCase();
+        if (message.includes('already exists')) {
+          errorMessage = 'El usuario ya existe.';
+        } else if (message.includes('weak password') || message.includes('at least 6 characters')) {
+          errorMessage = 'Contraseña débil. Debe tener al menos 6 caracteres.';
+        } else if (message.includes('format is invalid')) {
+          errorMessage = 'Formato de email inválido.';
+        } else {
+          errorMessage = message;
+        }
+      }
+
+      await this.showToast(errorMessage, 'danger');
+    } finally {
       await loading.dismiss();
-      await this.showToast('Error en el proceso. Intenta nuevamente.', 'danger');
     }
   }
 
