@@ -3,23 +3,39 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Gemini } from 'src/app/core/services/gemini';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-new',
   templateUrl: './new.page.html',
   styleUrls: ['./new.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule]
+  imports: [CommonModule, IonicModule, FormsModule, HttpClientModule],
+  providers: [Gemini]
 })
 export class NewPage implements OnInit {
   // Datos de la tendencia
   trendTitle: string = "MicroStrategy's $42 Billion Bitcoin Investment";
 
+
   // Controles de generación
-  longitud: number = 280;
+  longitud: number = 100;
   tono: number = 50;
   hashtag: boolean = false;
   emoji: boolean = false;
+
+  // Getter dinámico para el prompt
+  get prompt(): string {
+    return `Redacta un tuit sobre "${this.trendTitle}" con las siguientes indicaciones:
+- Longitud: ${this.longitud} caracteres.
+- Tono: ${this.getTonLabel()}.
+- Hashtags: ${this.hashtag ? "sí, incluir hashtags relevantes de forma natural." : "no incluir hashtags."}
+- Emojis: ${this.emoji ? "sí, usar emojis apropiados de manera natural." : "no usar emojis."}
+El tuit debe ser claro, informativo y llamativo para la audiencia.`;
+  }
+
 
   // Resultado
   resultado: string = '';
@@ -28,7 +44,8 @@ export class NewPage implements OnInit {
 
   constructor(
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private gemini : Gemini
   ) { }
 
   ngOnInit() {}
@@ -40,10 +57,10 @@ export class NewPage implements OnInit {
 
   // Obtener label del tono basado en el valor
   getTonLabel(): string {
-    if (this.tono < 25) return 'Muy Formal';
-    if (this.tono < 50) return 'Formal';
-    if (this.tono < 75) return 'Informal';
-    return 'Muy Informal';
+    if (this.tono < 25) return 'Muy Informal';
+    if (this.tono < 50) return 'Informal';
+    if (this.tono < 75) return 'Formal';
+    return 'Muy Formal';
   }
 
   generar() {
@@ -56,12 +73,22 @@ export class NewPage implements OnInit {
     });
 
     // Texto mock generado
-    this.resultado = `Gran noticia en el mundo crypto! MicroStrategy acaba de realizar una inversión histórica de $42 billones en Bitcoin. Este movimiento marca un precedente importante en la adopción institucional de criptomonedas.${this.hashtag ? ' #Bitcoin #Crypto #MicroStrategy' : ''}${this.emoji ? ' 🚀💰' : ''}`;
+    /*this.resultado = `Gran noticia en el mundo crypto! MicroStrategy acaba de realizar una inversión histórica de $42 billones en Bitcoin. Este movimiento marca un precedente importante en la adopción institucional de criptomonedas.${this.hashtag ? ' #Bitcoin #Crypto #MicroStrategy' : ''}${this.emoji ? ' 🚀💰' : ''}`;*/
 
-    this.mostrarResultado = true;
-    this.modoEdicion = false;
+    this.gemini.generateContent(this.prompt).subscribe({
+      next: (res) => {
+        this.resultado = res.reply;
+        this.mostrarResultado = true;
+        this.modoEdicion = false;
+        this.showToast('Texto generado exitosamente', 'success');
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        this.resultado = 'Ocurrió un error al generar el contenido.';
+      }
+    });
 
-    this.showToast('Texto generado exitosamente', 'success');
+    
   }
 
   editar() {
