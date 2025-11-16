@@ -47,7 +47,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     private router: Router,
     private toastController: ToastController,
     private gemini : Gemini,
-    private history : HistorySupabase,
+    private historySupabase : HistorySupabase,
   ) { }
 
   ngOnInit() {}
@@ -114,14 +114,14 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
 
     const entry = {
       trend_id: 'c9504660-6eec-4633-bc06-c5902329ff2b',   // pasa el id real
-      text: this.trendTitle,
+      text: this.resultado,
       length: this.longitud,
       tone: this.getTonLabel(),
       emojis: this.emoji,
       hashtag: this.hashtag
     };
 
-    const { data, error } = await this.history.guardar(entry);
+    const { data, error } = await this.historySupabase.guardar(entry);
 
     if (error) {
       console.error('Error al guardar:', error);

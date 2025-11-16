@@ -23,12 +23,12 @@
 
   <!-- Lista de historial -->
   <ion-list>
-    <ion-card *ngFor="let item of historyItems" class="history-card">
+    <ion-card *ngFor="let item of history" class="history-card">
       <ion-card-content>
         <ion-text color="medium">
-          <p class="fecha">{{ item.fecha }}</p>
+          <p class="fecha">{{ item.created_at }}</p>
         </ion-text>
-        <p class="texto">{{ item.texto }}</p>
+        <p class="texto">{{ item.text }}</p>
       </ion-card-content>
     </ion-card>
   </ion-list>
