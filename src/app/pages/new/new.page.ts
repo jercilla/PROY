@@ -5,6 +5,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Gemini } from 'src/app/core/services/gemini';
 import { HttpClientModule } from '@angular/common/http';
+import { HistorySupabase } from 'src/app/core/services/history-supabase';
 
 
 @Component({
@@ -45,7 +46,8 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
   constructor(
     private router: Router,
     private toastController: ToastController,
-    private gemini : Gemini
+    private gemini : Gemini,
+    private history : HistorySupabase,
   ) { }
 
   ngOnInit() {}
@@ -108,8 +110,24 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     }
   }
 
-  guardar() {
-    // Mock - API futura
+  async guardar() {
+
+    const entry = {
+      trend_id: 'c9504660-6eec-4633-bc06-c5902329ff2b',   // pasa el id real
+      text: this.trendTitle,
+      length: this.longitud,
+      tone: this.getTonLabel(),
+      emojis: this.emoji,
+      hashtag: this.hashtag
+    };
+
+    const { data, error } = await this.history.guardar(entry);
+
+    if (error) {
+      console.error('Error al guardar:', error);
+      return;
+    }
+
     console.log('Guardando en historial:', this.resultado);
     this.showToast('Guardado en historial', 'success');
 
