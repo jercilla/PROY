@@ -1,18 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface HistoryItem {
-  id: string;           // UUID
-  user_id: string;      // UUID del usuario
-  trend_id: string;     // UUID del trend relacionado
-  text: string;         // texto generado
-  length: number;       // longitud del texto (entre 120 y 1024)
-  tone: 'formal' | 'informal'; // enum que definiste en PostgreSQL
-  emojis: boolean;      // si se usan emojis
-  hashtag: boolean;     // si se usan hashtags
-  created_at: string;   // timestamp en formato ISO
-}
+import type { History } from 'src/app/core/models/history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +10,7 @@ export class HistorySupabase {
 
   private supabase: SupabaseClient;
 
-  private historySubject = new BehaviorSubject<HistoryItem[]>([]);
+  private historySubject = new BehaviorSubject<History[]>([]);
   public history$ = this.historySubject.asObservable();
 
 
@@ -55,7 +44,7 @@ export class HistorySupabase {
   async leer() : Promise<void>{
     
     const { data, error } = await this.supabase
-      .from<'history', HistoryItem>('history')
+      .from<'history', History>('history')
       .select('*')
       .order('created_at', { ascending: false });
 
