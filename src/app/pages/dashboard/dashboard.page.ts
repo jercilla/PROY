@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TrendCardComponent, TrendingNews } from '../../shared/components/trend-card/trend-card.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TrendsSupabase } from '../../core/services/trends-supabase';
+import { TrendRepository } from 'src/app/core/services/repositories/trend';
 import { HttpClientModule } from '@angular/common/http';
 import type { User } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/core/services/auth';
@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/core/services/auth';
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
   imports: [CommonModule, IonicModule, TrendCardComponent, HttpClientModule],
-  providers: [TrendsSupabase],
+  providers: [TrendRepository],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardPage implements OnInit {
@@ -37,7 +37,7 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private router: Router,
-    private trendsService: TrendsSupabase,
+    private trendRepository: TrendRepository,
     private authService: AuthService
   ) {}
 
@@ -49,7 +49,7 @@ export class DashboardPage implements OnInit {
     this.user  = await this.authService.getUser();
 
     // Suscribirse a las tendencias
-    this.trendsService.trends$.subscribe({
+    this.trendRepository.trends$.subscribe({
       next: (trends) => {
         this.trendingNews = trends;
         console.log('Tendencias actualizadas:', trends);
@@ -60,14 +60,14 @@ export class DashboardPage implements OnInit {
     });
 
     // Suscribirse al estado de carga
-    this.trendsService.loading$.subscribe({
+    this.trendRepository.loading$.subscribe({
       next: (loading) => {
         this.isLoading = loading;
       }
     });
 
     // Cargar tendencias explícitamente (el usuario ya está autenticado aquí)
-    this.trendsService.loadTrends();
+    this.trendRepository.getAll();
   }
 
   updateCurrentDate() {
@@ -110,6 +110,6 @@ export class DashboardPage implements OnInit {
     this.updateLastUpdateTime();
     // Recargar las tendencias desde el servicio
     console.log('Recargando tendencias...');
-    this.trendsService.refresh();
+    this.trendRepository.refresh();
   }
 }

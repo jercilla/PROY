@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { HistorySupabase } from 'src/app/core/services/history-supabase';
+import { HistoryRepository } from 'src/app/core/services/repositories/history';
 import { AuthService } from 'src/app/core/services/auth';
 import type { User } from '@supabase/supabase-js';
-import type { History } from 'src/app/core/models/history.model';
+import type { HistoryItem } from 'src/app/core/models/history.model';
 
 @Component({
   selector: 'app-history',
@@ -17,15 +17,15 @@ export class HistoryPage implements OnInit {
   
   user? : User | null;
 
-  history: History[] = [];
+  history: HistoryItem[] = [];
 
-  constructor(private historySupabase: HistorySupabase, private authService : AuthService) { }
+  constructor(private historyRepository: HistoryRepository, private authService : AuthService) { }
 
   async ngOnInit() {
     // Leer el usuario actual
     this.user  = await this.authService.getUser();
     // Suscribirse al historial
-    this.historySupabase.history$.subscribe(items => {
+    this.historyRepository.history$.subscribe(items => {
       this.history = items;
     });
   }

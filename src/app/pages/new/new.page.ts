@@ -5,7 +5,7 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Gemini } from 'src/app/core/services/gemini';
 import { HttpClientModule } from '@angular/common/http';
-import { HistorySupabase } from 'src/app/core/services/history-supabase';
+import { HistoryRepository } from 'src/app/core/services/repositories/history';
 import { Trend } from 'src/app/core/models/trends.model';
 
 
@@ -49,7 +49,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     private route: ActivatedRoute,
     private toastController: ToastController,
     private gemini : Gemini,
-    private historySupabase : HistorySupabase,
+    private historyRepository : HistoryRepository,
   ) { }
 
   ngOnInit() {
@@ -137,7 +137,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
       hashtag: this.hashtag
     };
 
-    const { data, error } = await this.historySupabase.guardar(entry);
+    const { data, error } = await this.historyRepository.create(entry);
 
     if (error) {
       console.error('Error al guardar:', error);
