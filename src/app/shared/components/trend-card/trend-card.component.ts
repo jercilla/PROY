@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Trend } from '../../../core/models/trends.model';
+import { DetailPage } from '../../../pages/detail/detail.page';
 
 // Alias para mantener compatibilidad
 export type TrendingNews = Trend;
@@ -17,9 +17,15 @@ export type TrendingNews = Trend;
 export class TrendCardComponent {
   @Input() news!: TrendingNews;
 
-  constructor(private router: Router) {}
+  constructor(private modalController: ModalController) {}
 
-  goToDetail() {
-    this.router.navigate(['/detail']);
+  async goToDetail() {
+    const modal = await this.modalController.create({
+      component: DetailPage,
+      componentProps: {
+        trend: this.news
+      }
+    });
+    await modal.present();
   }
 }

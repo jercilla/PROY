@@ -1,1 +1,28 @@
-// Placeholder
+.detail-content {
+  padding: 20px;
+}
+
+.trend-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.detail-item {
+  margin-bottom: 25px;
+
+  .label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .value {
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.crear-contenido-btn {
+  margin-top: 40px;
+}

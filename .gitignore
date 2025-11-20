@@ -72,3 +72,8 @@ Thumbs.db
 # E2E tests
 /e2e
 /test-results
+
+# Playwright
+/playwright-report
+playwright.config.ts
+.playwright

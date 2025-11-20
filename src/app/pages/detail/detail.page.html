@@ -1,14 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    <ion-title>Detalles de la Tendencia</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-text>
-    <p>detail works!</p>
-  </ion-text>
+  <div class="detail-content">
+    <h1 class="trend-title">{{ trend.trend_name }}</h1>
+
+    <div class="detail-item">
+      <p class="label">Categoría</p>
+      <p class="value">{{ trend.category }}</p>
+    </div>
+
+    <div class="detail-item">
+      <p class="label">Número de publicaciones</p>
+      <p class="value">{{ trend.post_count }}</p>
+    </div>
+
+    <div class="detail-item">
+      <p class="label">Trending desde</p>
+      <p class="value">{{ trend.trending_since }}</p>
+    </div>
+
+    <ion-button expand="block" (click)="crearContenido()">
+      Crear Contenido
+    </ion-button>
+  </div>
 </ion-content>
