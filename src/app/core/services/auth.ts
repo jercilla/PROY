@@ -80,6 +80,18 @@ export class AuthService {
     return !!data.user;
   }
 
+  // Obtenemos el usuario actual
+  async getUser() {
+    const { data, error } = await this.supabase.auth.getUser();
+
+    if (error) {
+      console.error('Error obteniendo usuario:', error.message);
+      return null;
+    }
+
+    return data.user ?? null;
+  }
+
   // Gestionamos el cierre de sesión
   async logout(): Promise<void> {
     const { error } = await this.supabase.auth.signOut();
@@ -88,4 +100,5 @@ export class AuthService {
       console.error('Error durante la desconexión:', error.message);
     }
   }
+  
 }
