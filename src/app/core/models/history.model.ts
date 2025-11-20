@@ -1,11 +1,20 @@
 export interface HistoryItem {
-  id: string;           // id del item de historial
-  user_id: string;      // id del usuario
-  trend_id: string;     // id del trend
-  text: string;         // texto generado
-  length: number;       // longitud del texto (entre 120 y 1024)
-  tone: 'Muy Informal' | 'Informal' | 'Formal' | 'Muy Formal'; // tono del texto
-  emojis: boolean;      // si se usan emojis
-  hashtag: boolean;     // si se usan hashtags
-  created_at: string;   // fecha de creación
+  id: string; // History item ID
+  user_id: string; // User ID
+  trend_id: string; // Trend ID
+  text: string; // Generated text
+  length: number; // Text length (between 120 and 1024)
+  tone: 'Muy Informal' | 'Informal' | 'Formal' | 'Muy Formal'; // Text tone
+  emojis: boolean; // Whether emojis are used
+  hashtag: boolean; // Whether hashtags are used
+  created_at: string; // Creation date
+}
+
+export interface CreateHistoryItemDto {
+  trend_id: string; // Trend ID
+  text: string; // Generated text
+  length: number; // Text length (between 120 and 1024)
+  tone: string; // Text tone
+  emojis: boolean; // Whether emojis are used
+  hashtag: boolean; // Whether hashtags are used
 }
