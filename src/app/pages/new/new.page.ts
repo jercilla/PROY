@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Gemini } from 'src/app/core/services/gemini';
 import { HttpClientModule } from '@angular/common/http';
 import { HistorySupabase } from 'src/app/core/services/history-supabase';
+import { Trend } from 'src/app/core/models/trends.model';
 
 
 @Component({
@@ -17,9 +18,9 @@ import { HistorySupabase } from 'src/app/core/services/history-supabase';
   providers: [Gemini]
 })
 export class NewPage implements OnInit {
-  // Datos de la tendencia
-  trendTitle: string = "MicroStrategy's $42 Billion Bitcoin Investment";
 
+  // Objeto trend
+  trend: Trend | null = null;
 
   // Controles de generación
   longitud: number = 100;
@@ -29,7 +30,7 @@ export class NewPage implements OnInit {
 
   // Getter dinámico para el prompt
   get prompt(): string {
-    return `Redacta un tuit sobre "${this.trendTitle}" con las siguientes indicaciones:
+    return `Redacta un tuit sobre "${this.trend?.trend_name}" con las siguientes indicaciones:
 - Longitud: ${this.longitud} caracteres.
 - Tono: ${this.getTonLabel()}.
 - Hashtags: ${this.hashtag ? "sí, incluir hashtags relevantes de forma natural." : "no incluir hashtags."}
@@ -45,12 +46,27 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private toastController: ToastController,
     private gemini : Gemini,
     private historySupabase : HistorySupabase,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Al cargar leemos el trend si existe
+    this.route.queryParams.subscribe(params => {
+      // Si existe deserializamos y asignamos
+      const trendJson = params['trend'];
+      if (trendJson) {
+        try {
+          this.trend = JSON.parse(trendJson) as Trend;
+          } catch (e) {
+          console.error('Error al parsear el JSON de la tendencia:', e);
+          this.trend = null;
+        }
+      }
+    });
+  }
 
   // Formatter para el pin del range de longitud
   pinFormatter(value: number): string {

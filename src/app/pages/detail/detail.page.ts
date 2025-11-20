@@ -26,8 +26,14 @@ export class DetailPage implements OnInit {
   }
 
   async crearContenido() {
-    // Cerrar el modal y navegar a la página de creación
+    // Convertimos el trend a JSON
+    const trendJSON = JSON.stringify(this.trend);
+    // Cerrar el modal y navegar a la página de creación enviando el trend seleccionado
     await this.modalController.dismiss();
-    this.router.navigate(['/new']);
+    this.router.navigate(['/new'], { 
+      queryParams: { 
+        trend: trendJSON
+      } 
+    });
   }
 }
