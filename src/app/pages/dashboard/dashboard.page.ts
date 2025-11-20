@@ -6,6 +6,8 @@ import { TrendCardComponent, TrendingNews } from '../../shared/components/trend-
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TrendsSupabase } from '../../core/services/trends-supabase';
 import { HttpClientModule } from '@angular/common/http';
+import type { User } from '@supabase/supabase-js';
+import { AuthService } from 'src/app/core/services/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class DashboardPage implements OnInit {
   currentDate: string = '';
   lastUpdate: string = '';
-  userName: string = 'Usuario';
+  user? : User | null;
 
   trendingNews: TrendingNews[] = [];
   isLoading: boolean = false;
@@ -35,12 +37,16 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private router: Router,
-    private trendsService: TrendsSupabase
+    private trendsService: TrendsSupabase,
+    private authService: AuthService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.updateCurrentDate();
     this.updateLastUpdateTime();
+
+    // Leer el usuario actual
+    this.user  = await this.authService.getUser();
 
     // Suscribirse a las tendencias
     this.trendsService.trends$.subscribe({

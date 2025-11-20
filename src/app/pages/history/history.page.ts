@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { HistorySupabase } from 'src/app/core/services/history-supabase';
+import { AuthService } from 'src/app/core/services/auth';
+import type { User } from '@supabase/supabase-js';
 
 export interface HistoryItem {
   id: string;           // UUID
@@ -24,39 +26,19 @@ export interface HistoryItem {
 })
 export class HistoryPage implements OnInit {
   
-  userName: string = 'Javi';
+  user? : User | null;
 
   history: HistoryItem[] = [];
 
-  /*historyItems: HistoryItem[] = [
-    {
-      id: 1,
-      fecha: 'jueves, 16 de octubre de 2025',
-      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 2,
-      fecha: 'jueves, 16 de octubre de 2025',
-      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 3,
-      fecha: 'jueves, 16 de octubre de 2025',
-      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-    {
-      id: 4,
-      fecha: 'jueves, 16 de octubre de 2025',
-      texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    }
-  ];*/
+  constructor(private historySupabase: HistorySupabase, private authService : AuthService) { }
 
-  constructor(private historySupabase: HistorySupabase) { }
-
-  ngOnInit() {
+  async ngOnInit() {
+    // Leer el usuario actual
+    this.user  = await this.authService.getUser();
+    // Suscribirse al historial
     this.historySupabase.history$.subscribe(items => {
-    this.history = items;
-  });
+      this.history = items;
+    });
   }
 
   abrirFiltros() {
