@@ -129,7 +129,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
   async guardar() {
 
     const entry = {
-      trend_id: 'c9504660-6eec-4633-bc06-c5902329ff2b',   // pasa el id real
+      trend_id: this.trend!.id,
       text: this.resultado,
       length: this.longitud,
       tone: this.getTonLabel(),
