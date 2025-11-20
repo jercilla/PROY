@@ -18,7 +18,6 @@ export class DetailPage implements OnInit {
     private modalController: ModalController,
     private router: Router
   ) { }
-
   ngOnInit() {}
 
   closeModal() {
