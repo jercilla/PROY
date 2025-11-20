@@ -1,4 +1,4 @@
-export interface History {
+export interface HistoryItem {
   id: string;           // id del item de historial
   user_id: string;      // id del usuario
   trend_id: string;     // id del trend

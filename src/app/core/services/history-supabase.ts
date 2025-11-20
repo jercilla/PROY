@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { BehaviorSubject, Observable } from 'rxjs';
-import type { History } from 'src/app/core/models/history.model';
+import { HistoryItem } from '../models/history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class HistorySupabase {
 
   private supabase: SupabaseClient;
 
-  private historySubject = new BehaviorSubject<History[]>([]);
+  private historySubject = new BehaviorSubject<HistoryItem[]>([]);
   public history$ = this.historySubject.asObservable();
 
 
@@ -44,7 +44,7 @@ export class HistorySupabase {
   async leer() : Promise<void>{
     
     const { data, error } = await this.supabase
-      .from<'history', History>('history')
+      .from<'history', HistoryItem>('history')
       .select('*')
       .order('created_at', { ascending: false });
 
