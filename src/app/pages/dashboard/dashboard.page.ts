@@ -4,13 +4,16 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TrendCardComponent, TrendingNews } from '../../shared/components/trend-card/trend-card.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TrendsSupabase } from '../../core/services/trends-supabase';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, TrendCardComponent],
+  imports: [CommonModule, IonicModule, TrendCardComponent, HttpClientModule],
+  providers: [TrendsSupabase],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardPage implements OnInit {
@@ -18,26 +21,8 @@ export class DashboardPage implements OnInit {
   lastUpdate: string = '';
   userName: string = 'Usuario';
 
-  trendingNews: TrendingNews[] = [
-    {
-      id: 1,
-      title: 'Noticia Trending 1',
-      description: 'Esta es una descripción de ejemplo para la primera noticia trending del día.',
-      category: 'Tecnología'
-    },
-    {
-      id: 2,
-      title: 'Noticia Trending 2',
-      description: 'Esta es una descripción de ejemplo para la segunda noticia trending del día.',
-      category: 'Entretenimiento'
-    },
-    {
-      id: 3,
-      title: 'Noticia Trending 3',
-      description: 'Esta es una descripción de ejemplo para la tercera noticia trending del día.',
-      category: 'Deportes'
-    }
-  ];
+  trendingNews: TrendingNews[] = [];
+  isLoading: boolean = false;
 
   slideOpts = {
     slidesPerView: 1,
@@ -48,11 +33,35 @@ export class DashboardPage implements OnInit {
     }
   };
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private trendsService: TrendsSupabase
+  ) {}
 
   ngOnInit() {
     this.updateCurrentDate();
     this.updateLastUpdateTime();
+
+    // Suscribirse a las tendencias
+    this.trendsService.trends$.subscribe({
+      next: (trends) => {
+        this.trendingNews = trends;
+        console.log('Tendencias actualizadas:', trends);
+      },
+      error: (err) => {
+        console.error('Error al cargar tendencias:', err);
+      }
+    });
+
+    // Suscribirse al estado de carga
+    this.trendsService.loading$.subscribe({
+      next: (loading) => {
+        this.isLoading = loading;
+      }
+    });
+
+    // Cargar tendencias explícitamente (el usuario ya está autenticado aquí)
+    this.trendsService.loadTrends();
   }
 
   updateCurrentDate() {
@@ -93,7 +102,8 @@ export class DashboardPage implements OnInit {
 
   refreshCards() {
     this.updateLastUpdateTime();
-    // Aquí se recargarían las cards desde el servicio
+    // Recargar las tendencias desde el servicio
     console.log('Recargando tendencias...');
+    this.trendsService.refresh();
   }
 }

@@ -2,13 +2,10 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Trend } from '../../../core/models/trends.model';
 
-export interface TrendingNews {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-}
+// Alias para mantener compatibilidad
+export type TrendingNews = Trend;
 
 @Component({
   selector: 'app-trend-card',
