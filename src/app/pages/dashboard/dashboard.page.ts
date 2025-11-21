@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TrendCardComponent, TrendingNews } from '../../shared/components/trend-card/trend-card.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import type { User } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/core/services/auth';
 import { register } from 'swiper/element';
+import { DetailPage } from '../detail/detail.page';
 register();
 
 @Component({
@@ -35,6 +36,9 @@ export class DashboardPage implements OnInit {
   // Definir variable para el estado de carga
   isLoading: boolean = false;
 
+  // Definir variable para el índice del slide actual
+  currentSlideIndex = 0;
+
   // Definir configuración del carrusel
   slideOpts = {
     slidesPerView: 1,
@@ -48,7 +52,8 @@ export class DashboardPage implements OnInit {
   constructor(
     private router: Router,
     private trendRepository: TrendRepository,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalController: ModalController
   ) {}
 
   async ngOnInit() {
@@ -108,12 +113,24 @@ export class DashboardPage implements OnInit {
     this.router.navigate(['/history']);
   }
 
-  goToDetail() {
-    this.router.navigate(['/detail']);
+  async goToDetail() {
+    const trend = this.getCurrentTrend();
+    if (!trend) return;
+
+    const modal = await this.modalController.create({
+      component: DetailPage,
+      componentProps: { trend }
+    });
+    await modal.present();
   }
 
   goToNew() {
-    this.router.navigate(['/new']);
+    const trend = this.getCurrentTrend();
+    if (!trend) return;
+
+    this.router.navigate(['/new'], {
+      queryParams: { trend: JSON.stringify(trend) }
+    });
   }
 
   refreshCards() {
@@ -122,4 +139,14 @@ export class DashboardPage implements OnInit {
     console.log('Recargando tendencias...');
     this.trendRepository.refresh();
   }
+
+  onSlideChange(event: any) {
+    const swiper = event.target.swiper;
+    this.currentSlideIndex = swiper.activeIndex;
+  }
+
+  getCurrentTrend(): TrendingNews | null {
+  if (!this.trendingNews || this.trendingNews.length === 0) return null;
+  return this.trendingNews[this.currentSlideIndex];
+}
 }
