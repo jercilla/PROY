@@ -8,6 +8,8 @@ import { TrendRepository } from 'src/app/core/services/repositories/trend';
 import { HttpClientModule } from '@angular/common/http';
 import type { User } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/core/services/auth';
+import { register } from 'swiper/element';
+register();
 
 @Component({
   selector: 'app-dashboard',
@@ -19,13 +21,21 @@ import { AuthService } from 'src/app/core/services/auth';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class DashboardPage implements OnInit {
+
+  // Definir variables de fecha
   currentDate: string = '';
   lastUpdate: string = '';
+
+  // Definir variable para el usuario
   user? : User | null;
 
+  // Definir variable para el conjunto de noticias
   trendingNews: TrendingNews[] = [];
+
+  // Definir variable para el estado de carga
   isLoading: boolean = false;
 
+  // Definir configuración del carrusel
   slideOpts = {
     slidesPerView: 1,
     spaceBetween: 10,

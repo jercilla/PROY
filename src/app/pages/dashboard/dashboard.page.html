@@ -24,11 +24,27 @@
     <h2>Bienvenido {{ user?.email }}</h2>
   </ion-text>
 
-  <swiper-container [slidesPerView]="1" [pagination]="true">
+  <div *ngIf="isLoading" class="ion-text-center ion-padding-vertical">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando noticias...</p>
+  </div>
+
+  <swiper-container
+    *ngIf="!isLoading && trendingNews.length > 0"
+    [slidesPerView]="slideOpts.slidesPerView"
+    [spaceBetween]="slideOpts.spaceBetween"
+    [pagination]="slideOpts.pagination"
+    class="trending-swiper"
+  >
     <swiper-slide *ngFor="let news of trendingNews">
       <app-trend-card [news]="news"></app-trend-card>
     </swiper-slide>
+    <div class="swiper-pagination"></div> 
   </swiper-container>
+
+  <ion-text *ngIf="!isLoading && trendingNews.length === 0" color="medium" class="ion-text-center ion-padding-vertical">
+    <p>No hay noticias de tendencia disponibles en este momento.</p>
+  </ion-text>
 
   <ion-button expand="block" (click)="goToDetail()">
     Detalles
