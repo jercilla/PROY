@@ -13,7 +13,7 @@ export class UserSettingsRepository extends SupabaseRepository{
     length: 120,
     tone: "Muy Informal",
     emojis: true,
-    hashtag: true,
+    hashtags: true,
   };
 
   // BehaviorSubject para gestionar el estado de la configuracion
@@ -46,7 +46,7 @@ export class UserSettingsRepository extends SupabaseRepository{
     const { data, error } = await this.client
       .from('user_settings')
       .select<string, UserSettings>('*')
-      .eq('user_id', userId) 
+      .eq('id', userId) 
       .single();
 
     // Avisa si no existe y devuelve configuración por defecto
