@@ -5,8 +5,10 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Gemini } from 'src/app/core/services/gemini';
 import { HttpClientModule } from '@angular/common/http';
+import { UserSettingsRepository } from 'src/app/core/services/repositories/user-settings';
 import { HistoryRepository } from 'src/app/core/services/repositories/history';
 import { Trend } from 'src/app/core/models/trends.model';
+import { CreateHistoryItemDto } from 'src/app/core/models/history.model';
 
 
 @Component({
@@ -19,25 +21,26 @@ import { Trend } from 'src/app/core/models/trends.model';
 })
 export class NewPage implements OnInit {
 
-  // Objeto trend
+  // Definimos variable para la tendencia
   trend: Trend | null = null;
 
-  // Controles de generación
-  longitud: number = 100;
-  tono: number = 50;
-  hashtag: boolean = false;
-  emoji: boolean = false;
+  // Definimos variables para los campos de configuración
+  length: number = 100;
+  tonePercentage: number = 0;
+  tone : string = "Muy Informal";
+  hashtags: boolean = false;
+  emojis: boolean = false;
 
   // Getter dinámico para el prompt
   get prompt(): string {
     return `Redacta un tuit sobre "${this.trend?.trend_name}" con las siguientes indicaciones:
-- Longitud: ${this.longitud} caracteres.
+- Longitud: ${this.length} caracteres.
 - Tono: ${this.getTonLabel()}.
-- Hashtags: ${this.hashtag ? "sí, incluir hashtags relevantes de forma natural." : "no incluir hashtags."}
-- Emojis: ${this.emoji ? "sí, usar emojis apropiados de manera natural." : "no usar emojis."}
+- Hashtags: ${this.hashtags ? "sí, incluir hashtags relevantes de forma natural." : "no incluir hashtags."}
+- Emojis: ${this.emojis ? "sí, usar emojis apropiados de manera natural." : "no usar emojis."}
 El tuit debe ser claro, informativo y llamativo para la audiencia.`;
   }
-
+ 
 
   // Resultado
   resultado: string = '';
@@ -50,10 +53,11 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     private toastController: ToastController,
     private gemini : Gemini,
     private historyRepository : HistoryRepository,
+    private userSettingsRepository : UserSettingsRepository
   ) { }
 
   ngOnInit() {
-    // Al cargar leemos el trend si existe
+    // Leemos el trend si existe
     this.route.queryParams.subscribe(params => {
       // Si existe deserializamos y asignamos
       const trendJson = params['trend'];
@@ -62,9 +66,19 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
           this.trend = JSON.parse(trendJson) as Trend;
           } catch (e) {
           console.error('Error al parsear el JSON de la tendencia:', e);
-          this.trend = null;
+          this.router.navigate(['/dashboard']);
+          return; 
         }
       }
+    });
+    
+    // Leemos la configuración del usuario
+    this.userSettingsRepository.userSettings$.subscribe(settings => {
+      this.length = settings!.length || 120;
+      this.tone = settings!.tone || "Muy informal";
+      this.hashtags = settings!.hashtags || true;
+      this.emojis = settings!.emojis || true;
+      console.log('Configuración del usuario aplicada:', settings);
     });
   }
 
@@ -75,23 +89,13 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
 
   // Obtener label del tono basado en el valor
   getTonLabel(): string {
-    if (this.tono < 25) return 'Muy Informal';
-    if (this.tono < 50) return 'Informal';
-    if (this.tono < 75) return 'Formal';
+    if (this.tonePercentage < 25) return 'Muy Informal';
+    if (this.tonePercentage < 50) return 'Informal';
+    if (this.tonePercentage < 75) return 'Formal';
     return 'Muy Formal';
   }
 
   generar() {
-    // Simular generación de texto con IA
-    console.log('Generando texto con parámetros:', {
-      longitud: this.longitud,
-      tono: this.tono,
-      hashtag: this.hashtag,
-      emoji: this.emoji
-    });
-
-    // Texto mock generado
-    /*this.resultado = `Gran noticia en el mundo crypto! MicroStrategy acaba de realizar una inversión histórica de $42 billones en Bitcoin. Este movimiento marca un precedente importante en la adopción institucional de criptomonedas.${this.hashtag ? ' #Bitcoin #Crypto #MicroStrategy' : ''}${this.emoji ? ' 🚀💰' : ''}`;*/
 
     this.gemini.generateContent(this.prompt).subscribe({
       next: (res) => {
@@ -106,7 +110,15 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
       }
     });
 
-    
+    // Simular generación de texto con IA
+    console.log('Generando texto con parámetros:', {
+      length: this.length,
+      tono: this.tone,
+      hashtag: this.hashtags,
+      emoji: this.emojis,
+      resultado : this.resultado
+    });
+
   }
 
   editar() {
@@ -128,16 +140,16 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
 
   async guardar() {
 
-    const entry = {
+    const historyItem : CreateHistoryItemDto = {
       trend_id: this.trend!.id,
       text: this.resultado,
-      length: this.longitud,
+      length: this.length,
       tone: this.getTonLabel(),
-      emojis: this.emoji,
-      hashtag: this.hashtag
+      emojis: this.emojis,
+      hashtag: this.hashtags
     };
 
-    const { data, error } = await this.historyRepository.create(entry);
+    const { data, error } = await this.historyRepository.create(historyItem);
 
     if (error) {
       console.error('Error al guardar:', error);

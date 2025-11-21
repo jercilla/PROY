@@ -21,14 +21,14 @@
     <div class="control-item">
       <ion-label>Longitud</ion-label>
       <ion-range
-        [(ngModel)]="longitud"
+        [(ngModel)]="length"
         min="1"
         max="280"
         pin="true"
         [pinFormatter]="pinFormatter">
       </ion-range>
       <ion-text color="medium">
-        <p class="range-value">{{ longitud }} car.</p>
+        <p class="range-value">{{ length }} car.</p>
       </ion-text>
     </div>
 
@@ -36,7 +36,7 @@
     <div class="control-item">
       <ion-label>Tono</ion-label>
       <ion-range
-        [(ngModel)]="tono"
+        [(ngModel)]="tonePercentage"
         min="0"
         max="100">
       </ion-range>
@@ -49,7 +49,7 @@
     <div class="control-item">
       <ion-item lines="none">
         <ion-label>Hashtag</ion-label>
-        <ion-toggle [(ngModel)]="hashtag" slot="end"></ion-toggle>
+        <ion-toggle [(ngModel)]="hashtags" slot="end"></ion-toggle>
       </ion-item>
     </div>
 
@@ -57,7 +57,7 @@
     <div class="control-item">
       <ion-item lines="none">
         <ion-label>Emoji</ion-label>
-        <ion-toggle [(ngModel)]="emoji" slot="end"></ion-toggle>
+        <ion-toggle [(ngModel)]="emojis" slot="end"></ion-toggle>
       </ion-item>
     </div>
   </div>
