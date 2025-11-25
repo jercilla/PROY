@@ -8,8 +8,9 @@ import { TrendRepository } from 'src/app/core/services/repositories/trend';
 import { HttpClientModule } from '@angular/common/http';
 import type { User } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/core/services/auth';
-import { register } from 'swiper/element';
+import { register } from 'swiper/element/bundle';
 import { DetailPage } from '../detail/detail.page';
+
 register();
 
 @Component({
@@ -41,13 +42,13 @@ export class DashboardPage implements OnInit {
 
   // Definir configuración del carrusel
   slideOpts = {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true
+  slidesPerView: 1,
+  spaceBetween: 0,
+  pagination: {
+    clickable: true
     }
   };
+
 
   constructor(
     private router: Router,
@@ -148,5 +149,7 @@ export class DashboardPage implements OnInit {
   getCurrentTrend(): TrendingNews | null {
   if (!this.trendingNews || this.trendingNews.length === 0) return null;
   return this.trendingNews[this.currentSlideIndex];
-}
+  }
+
+  
 }

@@ -36,6 +36,8 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+
+
 body {
   font-family: var(--font-text);
   font-size: var(--font-body);
@@ -44,13 +46,14 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 600;
+  color: var(--color-electric);
 }
 
 p {
     font-family: var(--font-text);
 }
 
-ion-button {
+.button-general {
   font-family: var(--font-heading);
   --background: var(--color-electric);
   --border-radius: 26px;
@@ -58,9 +61,20 @@ ion-button {
   --padding-bottom: 14px;
 }
 
+ion-label{
+    font-family: var(--font-text);
+}
+
 .toast-card {
   font-family: var(--font-heading);          /* Poppins */
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 0.3px;
+}
+
+swiper-container {
+  --swiper-pagination-color: var(--color-electric); /* bullet activo */
+  --swiper-pagination-bullet-inactive-color: #ccc; /* bullet inactivo */
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-size: 10px; /* opcional */
 }

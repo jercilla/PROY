@@ -1,26 +1,78 @@
-// Estilos mínimos usando solo clases utility de Ionic
-ion-chip {
-  margin: 20px 0;
+
+/* --- CONTENEDOR GENERAL --- */
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* centra todo en horizontal */
+  padding-top: 5px;
 }
 
-swiper-container {
-  width: 100%;
-  height: auto;
-  margin: 20px 0;
+/* -------- HEADER -------- */
+ion-toolbar {
+  --background: #ffffff;
+  --color: var(--color-electric);
 }
 
-swiper-slide {
+.header-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* -------- FECHA (PÍLDORA AMARILLA) -------- */
+.date-pill {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--color-neon);
+  border-radius: 20px;
+  color: var(--color-electric);
+  gap: 20px;
 }
 
-ion-icon[name="refresh-outline"] {
-  cursor: pointer;
-  margin-left: 8px;
-  vertical-align: middle;
+/* -------- BIENVENIDA -------- */
+.username {
+  font-style: italic;
+  color: var(--color-electric);
 }
 
-ion-button {
-  margin-top: 10px;
+
+
+/* --- CARD DENTRO DEL SLIDE --- */
+app-trend-card {
+  width: 100%;           /* Cabe perfectamente dentro */
+  border-radius: 16px;
+  overflow: hidden;     /* Evita desbordes */
+  display: block;
+}
+
+
+/* --- FILAS --- */
+.row-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10;
+}
+
+.row-align ion-button {
+  flex: 1;             /* Los botones se expanden */
+  width: 100%;          /* Por si acaso */
+  max-width: none;      /* Evita límites */
+  font-family: var(--font-heading);
+}
+
+/* --- SINCRONIZAR --- */
+.sync {
+  font-family: var(--font-text);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #7a7a7a;
+}
+
+.sync ion-button ion-icon {
+  color: #7a7a7a;
 }

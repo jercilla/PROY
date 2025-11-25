@@ -1,64 +1,80 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goToSettings()">
+      <ion-button aria-label="Settings" (click)="goToSettings()">
         <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title class="header-title">Home</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="goToHistory()">
+      <ion-button aria-label="History" (click)="goToHistory()">
         <ion-icon slot="icon-only" name="bookmark-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-chip color="warning">
+
+<ion-content class="ion-padding home-wrapper">
+
+  <!-- FECHA -->
+  <div class="date-pill">
     <ion-icon name="calendar-outline"></ion-icon>
-    <ion-label>{{ currentDate }}</ion-label>
-  </ion-chip>
+    <p>{{ currentDate }}</p>
+  </div>
 
-  <ion-text>
-    <h2>Bienvenido {{ user?.email }}</h2>
-  </ion-text>
+  <!-- BIENVENIDA -->
+  <h2>Bienvenido,</h2>
+  <p class="username">{{ user?.email }}</p>
 
+  <!-- LOADING -->
   <div *ngIf="isLoading" class="ion-text-center ion-padding-vertical">
     <ion-spinner name="crescent"></ion-spinner>
     <p>Cargando noticias...</p>
   </div>
 
-  <swiper-container
-    *ngIf="!isLoading && trendingNews.length > 0"
-    [slidesPerView]="slideOpts.slidesPerView"
-    [spaceBetween]="slideOpts.spaceBetween"
-    [pagination]="slideOpts.pagination"
-    class="trending-swiper"
-    (swiperslidechange)="onSlideChange($event)"
-  >
-    <swiper-slide *ngFor="let news of trendingNews">
-      <app-trend-card [news]="news"></app-trend-card>
-    </swiper-slide>
-    <div class="swiper-pagination"></div> 
-  </swiper-container>
+  <div>
+    <!-- SWIPER -->
+    <swiper-container
+      *ngIf="!isLoading && trendingNews.length > 0"
+      [slidesPerView]="slideOpts.slidesPerView"
+      [spaceBetween]="slideOpts.spaceBetween"
+      [pagination]="slideOpts.pagination"
+    >
+      <swiper-slide *ngFor="let news of trendingNews">
+        <app-trend-card [news]="news"></app-trend-card>
+      </swiper-slide>
 
-  <ion-text *ngIf="!isLoading && trendingNews.length === 0" color="medium" class="ion-text-center ion-padding-vertical">
+    </swiper-container>
+
+    <!-- BOTONES -->
+    <div class="row-align">
+      <ion-button expand="block" (click)="goToDetail()">
+        Detalles
+      </ion-button>
+
+      <ion-button expand="block" (click)="goToNew()">
+        Crear
+      </ion-button>
+    </div>
+  </div>
+
+
+  <!-- SIN NOTICIAS -->
+  <ion-text
+    *ngIf="!isLoading && trendingNews.length === 0"
+    color="medium"
+    class="ion-text-center ion-padding-vertical"
+  >
     <p>No hay noticias de tendencia disponibles en este momento.</p>
   </ion-text>
 
-  <ion-button expand="block" (click)="goToDetail()">
-    Detalles
-  </ion-button>
+  <!-- SYNC -->
+  <div class="sync">
+    <p>Last update {{ lastUpdate }}</p>
+    <ion-button fill="clear" size="small" (click)="refreshCards()">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-button>
+  </div>
 
-  <ion-button expand="block" (click)="goToNew()">
-    Crear
-  </ion-button>
-
-  <ion-text color="medium" class="ion-text-center">
-    <p>
-      <small>Last update {{ lastUpdate }}</small>
-      <ion-icon name="refresh-outline" (click)="refreshCards()"></ion-icon>
-    </p>
-  </ion-text>
 </ion-content>
