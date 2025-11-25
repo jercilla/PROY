@@ -1,19 +1,17 @@
-/* Hace que el content use toda la pantalla */
-.welcome-page {
+/* Full background for the screen */
+ion-content {
   --background: var(--color-electric);
-  height: 100%;
 }
 
-/* CONTENEDOR FLEX QUE MANTIENE TODO */
+/* Make the wrapper fill the whole screen */
 .wrapper {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-/* Parte azul superior */
+/* Top section takes its natural height (42% or whatever you set) */
 .top-section {
-  background: var(--color-electric);
   height: 42%;
   display: flex;
   justify-content: center;
@@ -21,38 +19,21 @@
   padding-bottom: 20px;
 }
 
-.illustration {
-  width: 55%;
-  max-width: 220px;
-}
-
-/* Parte blanca que debe crecer */
+/* Bottom card expands to fill all remaining space */
 .bottom-card {
+  flex: 1;                 /* 👈 THIS IS THE KEY */
   background: white;
-  flex: 1;                  /* ⭐ CLAVE: ocupa todo el espacio restante */
   border-top-left-radius: 45px;
   border-top-right-radius: 45px;
   padding: 40px 28px;
   text-align: center;
   margin-top: -20px;
+  display: flex;           /* Optional: to center its content vertically */
+  flex-direction: column;
 }
 
-.bottom-card h2 {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--color-electric);
-  margin-bottom: 16px;
-}
 
-.bottom-card p {
-  font-size: 15px;
-  line-height: 1.4;
-  color: #333;
-  margin-bottom: 40px;
-}
-
-/* Botón */
-.btn-continue {
-  font-size: 17px;
-  font-weight: 600;
+.illustration {
+  width: 55%;
+  max-width: 220px;
 }
