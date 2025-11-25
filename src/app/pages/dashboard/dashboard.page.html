@@ -35,7 +35,7 @@
     [spaceBetween]="slideOpts.spaceBetween"
     [pagination]="slideOpts.pagination"
     class="trending-swiper"
-    (swiperSlideChange)="onSlideChange($event)"
+    (swiperslidechange)="onSlideChange($event)"
   >
     <swiper-slide *ngFor="let news of trendingNews">
       <app-trend-card [news]="news"></app-trend-card>

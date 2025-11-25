@@ -141,7 +141,7 @@ export class DashboardPage implements OnInit {
   }
 
   onSlideChange(event: any) {
-    const swiper = event.target.swiper;
+    const swiper = event.detail[0];
     this.currentSlideIndex = swiper.activeIndex;
   }
 
