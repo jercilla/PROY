@@ -1,35 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Detalles de la Tendencia</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeModal()">
-        <ion-icon name="close" slot="icon-only"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<div class="popup-wrapper">
 
-<ion-content class="ion-padding">
-  <div class="detail-content">
-    <h1 class="trend-title">{{ trend?.trend_name }}</h1>
+  <!-- Card Popup -->
+  <div class="popup-card">
 
+    <!-- Botón cerrar -->
+    <button class="close-btn" (click)="closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+
+    <!-- Título -->
+    <h1 class="trend-title">{{ trend.trend_name }}</h1>
+
+    <!-- Items -->
     <div class="detail-item">
-      <p class="label">Categoría</p>
+      <p class="label">Categoría:</p>
       <p class="value">{{ trend.category }}</p>
     </div>
 
     <div class="detail-item">
-      <p class="label">Número de publicaciones</p>
+      <p class="label">Número de Publicaciones:</p>
       <p class="value">{{ trend.post_count }}</p>
     </div>
 
     <div class="detail-item">
-      <p class="label">Trending desde</p>
+      <p class="label">Trending Desde:</p>
       <p class="value">{{ trend.trending_since }}</p>
     </div>
 
-    <ion-button expand="block" (click)="crearContenido()">
+    <!-- Botón Crear Contenido -->
+    <ion-button class="button-general" expand="block" (click)="crearContenido()">
       Crear Contenido
     </ion-button>
+
   </div>
-</ion-content>
+
+</div>

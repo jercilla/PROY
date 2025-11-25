@@ -1,28 +1,76 @@
-.detail-content {
-  padding: 20px;
+/* -------- HEADER -------- */
+ion-toolbar {
+  --background: #ffffff;
+  --color: var(--color-electric);
 }
 
+.header-title {
+  text-align: center;
+}
+
+
+/* -------- TITULO -------- */
 .trend-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 30px;
+  text-align: center;
 }
 
+/* -------- DETALLES -------- */
 .detail-item {
   margin-bottom: 25px;
+  font-family: var(--font-text);
 
   .label {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
+    color: var(--color-tang);
   }
 
   .value {
     font-size: 16px;
     margin: 0;
+    color: var(--color-electric);
   }
 }
 
-.crear-contenido-btn {
-  margin-top: 40px;
+/* -------- BOTON CERRAR -------- */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 22px;
+    color: var(--color-electric);
+  }
 }
+
+/* -------- FONDO MODAL -------- */
+.popup-wrapper {
+  --background: rgba(0, 0, 0, 0.35);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+/* -------- CARD -------- */
+.popup-card {
+  background: #ffffff;
+  padding: 25px;
+}
+

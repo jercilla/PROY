@@ -120,7 +120,8 @@ export class DashboardPage implements OnInit {
 
     const modal = await this.modalController.create({
       component: DetailPage,
-      componentProps: { trend }
+      componentProps: { trend },
+      cssClass: 'modal-popup'
     });
     await modal.present();
   }
@@ -151,5 +152,4 @@ export class DashboardPage implements OnInit {
   return this.trendingNews[this.currentSlideIndex];
   }
 
-  
 }
