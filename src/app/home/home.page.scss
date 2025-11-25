@@ -1,6 +1,7 @@
 /* Hace que el content use toda la pantalla */
 .welcome-page {
   --background: var(--color-electric);
+  height: 100%;
 }
 
 /* CONTENEDOR FLEX QUE MANTIENE TODO */
