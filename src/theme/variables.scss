@@ -1,2 +1,38 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+/* ============================================================
+   PALETA DE COLORES PRINCIPAL
+   ============================================================ */
+:root {
+  --color-electric: #303A95;
+  --color-tang: #F8982E;
+  --color-sky: #A9D7F3;
+  --color-neon: #D8E022;
+  --color-coldbrew: #D19082;
+
+  /* Fondo */
+  --bg-light: #ffffff;
+
+  /* Texto */
+  --text-light: #ffffff;
+  --text-dark: #1d1d1d;
+
+  /* Bordes */
+  --radius-pill: 30px;
+  --radius-card: 22px;
+  --radius-input: 16px;
+
+  /* Tamaños */
+  --font-title: 22px;
+  --font-subtitle: 17px;
+  --font-body: 15px;
+}
+
+/* Color primario para Ionic */
+:root {
+  --ion-color-primary: var(--color-electric);
+  --ion-color-primary-rgb: 48,58,149;
+
+  --ion-color-secondary: var(--color-tang);
+  --ion-color-secondary-rgb: 248,152,46;
+
+  --ion-color-tertiary: var(--color-sky);
+}

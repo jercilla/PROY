@@ -1,13 +1,61 @@
-// Estilos mínimos usando solo clases utility de Ionic
-ion-content {
-  --padding-top: 20%;
+/* Hace que el content use toda la pantalla */
+.welcome-page {
+  --background: var(--color-electric);
 }
 
-ion-card {
-  margin-bottom: 20px;
+/* CONTENEDOR FLEX QUE MANTIENE TODO */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-ion-icon {
-  font-size: 80px;
-  margin: 20px 0;
+/* Parte azul superior */
+.top-section {
+  background: var(--color-electric);
+  height: 42%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 20px;
+}
+
+.illustration {
+  width: 55%;
+  max-width: 220px;
+}
+
+/* Parte blanca que debe crecer */
+.bottom-card {
+  background: white;
+  flex: 1;                  /* ⭐ CLAVE: ocupa todo el espacio restante */
+  border-top-left-radius: 45px;
+  border-top-right-radius: 45px;
+  padding: 40px 28px;
+  text-align: center;
+  margin-top: -20px;
+}
+
+.bottom-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-electric);
+  margin-bottom: 16px;
+}
+
+.bottom-card p {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+/* Botón */
+.btn-continue {
+  --background: var(--color-electric);
+  --border-radius: 26px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-size: 17px;
+  font-weight: 600;
 }

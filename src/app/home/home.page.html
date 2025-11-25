@@ -1,23 +1,26 @@
-<ion-content [fullscreen]="true" class="ion-padding ion-text-center">
-  <ion-card>
-    <ion-card-header>
-      <ion-icon name="image-outline" size="large"></ion-icon>
-    </ion-card-header>
+<ion-content class="welcome-page">
 
-    <ion-card-content>
-      <ion-card-title>
-        <ion-text>
-          <h1>Bienvenido a Content Creator</h1>
-        </ion-text>
-      </ion-card-title>
+  <!-- Contenedor general con FLEX -->
+  <div class="wrapper">
 
-      <ion-text color="medium">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </ion-text>
-    </ion-card-content>
-  </ion-card>
+    <!-- Parte azul -->
+    <div class="top-section">
+      <img src="/assets/img/creator.png" alt="Creator" class="illustration">
+    </div>
 
-  <ion-button expand="block" (click)="goToLogin()">
-    Continuar
-  </ion-button>
+    <!-- Parte blanca que DEBE expandirse -->
+    <div class="bottom-card">
+      <h2>Bienvenido a<br>Content Creator</h2>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+      </p>
+
+      <ion-button expand="block" class="btn-continue" (click)="goToLogin()">
+        Continuar
+      </ion-button>
+    </div>
+
+  </div>
+
 </ion-content>
