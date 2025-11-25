@@ -59,25 +59,13 @@
 }
 
 
-/* ===========================================
-   TITULO
-=========================================== */
-.title {
-  width: 100%;
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: left;
-  color: var(--color-electric);
-
-}
 
 /* ===========================================
    FORM
 =========================================== */
 .form-box {
   width: 100%;
-  font-family: var(--font-text);
+  
 }
 
 /* ===========================================
@@ -95,16 +83,6 @@ ion-checkbox::part(container) {
   border: 2px solid var(--color-electric);
 }
 
-/* ===========================================
-   BOTÓN
-=========================================== */
-.main-btn {
-  height: 48px;
-  border-radius: 25px;
-  font-size: 17px;
-  margin-top: 10px;
-  --background: var(--color-electric);
-}
 
 /* ===========================================
    TEXTO OLVIDAR CONTRASEÑA
