@@ -1,33 +1,44 @@
 /* ===========================================
-   CONTENEDOR GENERAL CENTRADO
+   CONTENEDOR GENERAL
 =========================================== */
 .login-container {
   --background: var(--bg-light);
   display: flex;
-  justify-content: center;        /* Centra vertical/horizontal si hay suficiente espacio */
-  align-items: center;
+  justify-content: flex-start;  /* ← ya no centramos todo */
+  align-items: flex-start;
   height: 100%;
 }
 
-/* Caja que envuelve todo para centrarlo */
+/* Caja que contiene segmento + form */
 .center-wrapper {
   width: 90%;
   max-width: 420px;
   margin: auto;
+  min-height: 100%;
+  padding: 40px 0;
 
   display: flex;
   flex-direction: column;
-
-  min-height: 100%;          /* ← EVITA EL ESPACIO DE ABAJO */
-  justify-content: flex-start; /* Mantiene elementos ordenados */
-  padding: 40px 0;
 }
 
+/* ===========================================
+   FORM CENTRADO
+=========================================== */
+.form-center {
+  flex: 1;                       /* ocupa todo el espacio disponible */
+  display: flex;
+  align-items: center;           /* centra verticalmente */
+  justify-content: center;
+}
+
+/* Caja del formulario */
+.form-box {
+  width: 100%;
+}
 
 /* ===========================================
    SEGMENT
 =========================================== */
-
 .top-segment {
   background: transparent;
   border: 2px solid var(--color-electric);
@@ -36,7 +47,6 @@
   margin-bottom: 25px;
 }
 
-/* Segment buttons dentro de la variante superior */
 .top-segment ion-segment-button {
   --indicator-color: transparent;
 
@@ -48,17 +58,6 @@
   font-family: var(--font-heading);
   transition: background-color .25s ease, color .25s ease;
 }
-
-.top-segment ion-segment-button:hover {
-  --background: rgba(var(--color-electric-rgb), 0.15);
-}
-
-.top-segment ion-segment-button:focus-visible {
-  outline: 2px solid var(--color-electric);
-  outline-offset: 2px;
-}
-
-
 
 /* ===========================================
    FORM
@@ -104,4 +103,39 @@ ion-checkbox::part(container) {
   border: 1px solid #ccd2e3;
   padding: 0 12px;
   --highlight-height: 0;
+}
+
+/* ===========================================
+   MEDIA QUERIES RESPONSIVE
+=========================================== */
+
+/* Móviles muy pequeños (menos de 360px) */
+@media (max-width: 360px) {
+  .center-wrapper {
+    padding: 10px;
+  }
+
+  ion-input {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+/* Tablets (más de 600px) */
+@media (min-width: 600px) {
+  .center-wrapper {
+    max-width: 480px;
+    padding-top: 60px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .input-box {
+    padding: 8px 14px;
+  }
 }

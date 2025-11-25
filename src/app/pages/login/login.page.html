@@ -2,7 +2,7 @@
 
   <div class="center-wrapper">
 
-    <!-- SEGMENT -->
+    <!-- SEGMENTO ARRIBA -->
     <ion-segment [(ngModel)]="isLogin" class="top-segment">
       <ion-segment-button [value]="true">
         <ion-label>Iniciar Sesión</ion-label>
@@ -13,68 +13,67 @@
       </ion-segment-button>
     </ion-segment>
 
-    <!-- TÍTULO -->
-    <h2>
-      {{ isLogin ? 'Bienvenido,' : 'Únete,' }}
-    </h2>
+    <!-- FORMULARIO CENTRADO -->
+    <div class="form-center">
 
-    <!-- FORMULARIO -->
-    <div class="form-box">
+      <div class="form-box">
 
-      <!-- Email -->
-      <div class="form-field">
-        <label class="field-label">Correo electrónico</label>
-        <ion-item class="input-box">
-          <ion-input
-            [(ngModel)]="email"
-            type="email"
-            placeholder="ejemplo@email.com">
-          </ion-input>
-        </ion-item>
-      </div>
+        <!-- TÍTULO -->
+        <h2>
+          {{ isLogin ? 'Bienvenido,' : 'Únete,' }}
+        </h2>
 
-      <!-- Contraseña -->
-      <div class="form-field">
-        <label class="field-label">Contraseña</label>
-        <ion-item class="input-box">
-          <ion-input
-            [(ngModel)]="password"
-            type="password"
-            placeholder="********">
-          </ion-input>
-        </ion-item>
-      </div>
-
-      <!-- BLOQUE LOGIN O REGISTRO -->
-      <ng-container *ngIf="isLogin; else registerBlock">
-
-        <!-- Botón login -->
-        <ion-button expand="block" (click)="onSubmit()">
-          Iniciar Sesión
-        </ion-button>
-
-        <p class="forgot">¿Has olvidado tu contraseña?</p>
-
-      </ng-container>
-
-      <!-- Registro -->
-      <ng-template #registerBlock>
-
-        <!-- Aceptar políticas -->
-        <div class="check-box">
-          <ion-checkbox [(ngModel)]="accept"></ion-checkbox>
-          <span>Acepto los términos y condiciones</span>
+        <!-- Email -->
+        <div>
+          <p>Correo electrónico</p>
+          <ion-item class="input-box">
+            <ion-input
+              [(ngModel)]="email"
+              type="email"
+              placeholder="ejemplo@email.com">
+            </ion-input>
+          </ion-item>
         </div>
 
-        <!-- Botón registro -->
-        <ion-button expand="block" (click)="onSubmit()">
-          Registrarse
-        </ion-button>
+        <!-- Contraseña -->
+        <div>
+          <p>Contraseña</p>
+          <ion-item class="input-box">
+            <ion-input
+              [(ngModel)]="password"
+              type="password"
+              placeholder="********">
+            </ion-input>
+          </ion-item>
+        </div>
 
-      </ng-template>
+        <!-- BLOQUE LOGIN O REGISTRO -->
+        <ng-container *ngIf="isLogin; else registerBlock">
 
+          <!-- Botón login -->
+          <ion-button class="button-general" expand="block" (click)="onSubmit()">
+            Iniciar Sesión
+          </ion-button>
+
+          <p class="forgot">¿Has olvidado tu contraseña?</p>
+
+        </ng-container>
+
+        <!-- REGISTRO -->
+        <ng-template #registerBlock>
+
+          <div class="check-box">
+            <ion-checkbox [(ngModel)]="accept"></ion-checkbox>
+            <p>Acepto los términos y condiciones</p>
+          </div>
+
+          <ion-button class="button-general" expand="block" (click)="onSubmit()">
+            Registrarse
+          </ion-button>
+
+        </ng-template>
+      </div>
     </div>
-
   </div>
 
 </ion-content>
