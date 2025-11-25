@@ -35,3 +35,32 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+body {
+  font-family: var(--font-text);
+  font-size: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+p {
+    font-family: var(--font-text);
+}
+
+ion-button {
+  font-family: var(--font-heading);
+  --background: var(--color-electric);
+  --border-radius: 26px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+}
+
+.toast-card {
+  font-family: var(--font-heading);          /* Poppins */
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}

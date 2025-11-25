@@ -1,53 +1,80 @@
-<ion-content class="ion-padding ion-text-center">
-  <ion-card>
-    <ion-card-header>
-      <ion-segment [(ngModel)]="isLogin">
-        <ion-segment-button [value]="true">
-          <ion-label>Iniciar Sesión</ion-label>
-        </ion-segment-button>
-        <ion-segment-button [value]="false">
-          <ion-label>Registrarse</ion-label>
-        </ion-segment-button>
-      </ion-segment>
+<ion-content class="login-container" fullscreen>
 
-      <ion-card-subtitle>{{ isLogin ? 'Bienvenido de nuevo' : 'Únete a nosotros' }}</ion-card-subtitle>
-    </ion-card-header>
+  <div class="center-wrapper">
 
-    <ion-card-content>
-      <ion-list>
-        <ion-item>
+    <!-- SEGMENT -->
+    <ion-segment [(ngModel)]="isLogin" class="top-segment">
+      <ion-segment-button [value]="true">
+        <ion-label>Iniciar Sesión</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button [value]="false">
+        <ion-label>Registrarse</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- TÍTULO -->
+    <h2 class="title">
+      {{ isLogin ? 'Bienvenido,' : 'Únete,' }}
+    </h2>
+
+    <!-- FORMULARIO -->
+    <div class="form-box">
+
+      <!-- Email -->
+      <div class="form-field">
+        <label class="field-label">Correo electrónico</label>
+        <ion-item class="input-box">
           <ion-input
-            label="Correo electrónico"
-            label-placement="floating"
+            [(ngModel)]="email"
             type="email"
-            [(ngModel)]="email">
+            placeholder="ejemplo@email.com">
           </ion-input>
         </ion-item>
+      </div>
 
-        <ion-item>
+      <!-- Contraseña -->
+      <div class="form-field">
+        <label class="field-label">Contraseña</label>
+        <ion-item class="input-box">
           <ion-input
-            label="Contraseña"
-            label-placement="floating"
+            [(ngModel)]="password"
             type="password"
-            [(ngModel)]="password">
+            placeholder="********">
           </ion-input>
         </ion-item>
-      </ion-list>
+      </div>
 
-      <ion-button
-        expand="block"
-        (click)="onSubmit()"
-        [disabled]="!email || !password">
-        {{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}
-      </ion-button>
+      <!-- BLOQUE LOGIN O REGISTRO -->
+      <ng-container *ngIf="isLogin; else registerBlock">
 
-      <ion-text color="primary" *ngIf="isLogin">
-        <p><small>¿Olvidaste tu contraseña?</small></p>
-      </ion-text>
-    </ion-card-content>
-  </ion-card>
+        <!-- Botón login -->
+        <ion-button expand="block" class="main-btn" (click)="onSubmit()">
+          Iniciar Sesión
+        </ion-button>
 
-  <ion-text color="medium">
-    <p><small>Al continuar, aceptas nuestros términos y condiciones</small></p>
-  </ion-text>
+        <p class="forgot">¿Has olvidado tu contraseña?</p>
+
+      </ng-container>
+
+      <!-- Registro -->
+      <ng-template #registerBlock>
+
+        <!-- Aceptar políticas -->
+        <div class="check-box">
+          <ion-checkbox [(ngModel)]="accept"></ion-checkbox>
+          <span>Acepto los términos y condiciones</span>
+        </div>
+
+        <!-- Botón registro -->
+        <ion-button expand="block" class="main-btn" (click)="onSubmit()">
+          Registrarse
+        </ion-button>
+
+      </ng-template>
+
+    </div>
+
+  </div>
+
 </ion-content>

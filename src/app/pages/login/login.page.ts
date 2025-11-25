@@ -17,6 +17,8 @@ export class LoginPage  implements OnInit {
   email: string = '';
   password: string = '';
   isLogin: boolean = true;
+  accept: boolean = false;
+
 
   constructor(
     private authService: AuthService,
@@ -39,6 +41,11 @@ export class LoginPage  implements OnInit {
   async onSubmit() {
     if (!this.email || !this.password) {
       await this.showToast('Por favor, completa todos los campos', 'warning');
+      return;
+    }
+
+    if (!this.isLogin && !this.accept) {
+      await this.showToast('Debes aceptar las políticas para registrarte', 'warning');
       return;
     }
 
@@ -89,13 +96,26 @@ export class LoginPage  implements OnInit {
     }
   }
 
+  /**
+   * Mostrar toast tipo “card moderno”
+   * color: 'success' | 'warning' | 'danger'
+   */
   async showToast(message: string, color: string) {
+    const iconMap: Record<string, string> = {
+      success: 'checkmark-circle-outline',
+      warning: 'alert-circle-outline',
+      danger: 'close-circle-outline'
+    };
+
     const toast = await this.toastController.create({
       message,
       duration: 3000,
+      position: 'top',
       color,
-      position: 'top'
+      icon: iconMap[color] || undefined,
+      cssClass: 'toast-card' // Clase personalizada para estilo moderno
     });
+
     await toast.present();
   }
 }

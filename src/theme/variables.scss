@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
 /* ============================================================
    PALETA DE COLORES PRINCIPAL
-   ============================================================ */
+============================================================ */
 :root {
   --color-electric: #303A95;
   --color-tang: #F8982E;
@@ -20,13 +22,19 @@
   --radius-card: 22px;
   --radius-input: 16px;
 
-  /* Tamaños */
+  /* Tamaños tipográficos */
   --font-title: 22px;
   --font-subtitle: 17px;
   --font-body: 15px;
+
+  /* ============================
+     TIPOGRAFÍAS (añadido)
+  ============================ */
+  --font-text: 'Inter', system-ui, sans-serif;       /* Cuerpo, descripciones, listas */
+  --font-heading: 'Poppins', system-ui, sans-serif;  /* Títulos, encabezados */
 }
 
-/* Color primario para Ionic */
+/* Colores de Ionic */
 :root {
   --ion-color-primary: var(--color-electric);
   --ion-color-primary-rgb: 48,58,149;

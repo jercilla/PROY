@@ -1,13 +1,129 @@
-// Estilos mínimos usando solo clases utility de Ionic
-ion-content {
-  --padding-top: 15%;
+/* ===========================================
+   CONTENEDOR GENERAL CENTRADO
+=========================================== */
+.login-container {
+  --background: var(--bg-light);
+  display: flex;
+  justify-content: center;        /* Centra vertical/horizontal si hay suficiente espacio */
+  align-items: center;
+  height: 100%;
 }
 
-ion-card {
-  max-width: 400px;
-  margin: 0 auto 20px auto;
+/* Caja que envuelve todo para centrarlo */
+.center-wrapper {
+  width: 90%;
+  max-width: 420px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100%;          /* ← EVITA EL ESPACIO DE ABAJO */
+  justify-content: flex-start; /* Mantiene elementos ordenados */
+  padding: 40px 0;
 }
 
-ion-button {
-  margin-top: 20px;
+
+/* ===========================================
+   SEGMENT
+=========================================== */
+
+.top-segment {
+  background: transparent;
+  border: 2px solid var(--color-electric);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 25px;
+}
+
+/* Segment buttons dentro de la variante superior */
+.top-segment ion-segment-button {
+  --indicator-color: transparent;
+
+  --background: transparent;
+  --background-checked: var(--color-electric);
+  --color: var(--color-electric);
+  --color-checked: #fff;
+
+  font-family: var(--font-heading);
+  transition: background-color .25s ease, color .25s ease;
+}
+
+.top-segment ion-segment-button:hover {
+  --background: rgba(var(--color-electric-rgb), 0.15);
+}
+
+.top-segment ion-segment-button:focus-visible {
+  outline: 2px solid var(--color-electric);
+  outline-offset: 2px;
+}
+
+
+/* ===========================================
+   TITULO
+=========================================== */
+.title {
+  width: 100%;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: left;
+  color: var(--color-electric);
+
+}
+
+/* ===========================================
+   FORM
+=========================================== */
+.form-box {
+  width: 100%;
+  font-family: var(--font-text);
+}
+
+/* ===========================================
+   CHECKBOX
+=========================================== */
+.check-box {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 20px;
+  gap: 8px;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 6px;
+  border: 2px solid var(--color-electric);
+}
+
+/* ===========================================
+   BOTÓN
+=========================================== */
+.main-btn {
+  height: 48px;
+  border-radius: 25px;
+  font-size: 17px;
+  margin-top: 10px;
+  --background: var(--color-electric);
+}
+
+/* ===========================================
+   TEXTO OLVIDAR CONTRASEÑA
+=========================================== */
+.forgot {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #7a7a7a;
+}
+
+/* ===========================================
+   INPUTS
+=========================================== */
+.input-box {
+  --background: #fff;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #ccd2e3;
+  padding: 0 12px;
+  --highlight-height: 0;
 }
