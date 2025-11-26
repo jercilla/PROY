@@ -15,7 +15,7 @@
 </ion-header>
 
 
-<ion-content class="ion-padding home-wrapper">
+<ion-content class="ion-padding dashboard-container">
 
   <!-- FECHA -->
   <div class="date-pill">
@@ -40,6 +40,7 @@
       [slidesPerView]="slideOpts.slidesPerView"
       [spaceBetween]="slideOpts.spaceBetween"
       [pagination]="slideOpts.pagination"
+      (swiperslidechange)="onSlideChange($event)"
     >
       <swiper-slide *ngFor="let news of trendingNews">
         <app-trend-card [news]="news"></app-trend-card>
@@ -48,7 +49,7 @@
     </swiper-container>
 
     <!-- BOTONES -->
-    <div class="row-align">
+    <div class="button-row">
       <ion-button expand="block" (click)="goToDetail()">
         Detalles
       </ion-button>
@@ -69,8 +70,8 @@
     <p>No hay noticias de tendencia disponibles en este momento.</p>
   </ion-text>
 
-  <!-- SYNC -->
-  <div class="sync">
+  <!-- SYNC / Footer -->
+  <div class="sync-footer">
     <p>Last update {{ lastUpdate }}</p>
     <ion-button fill="clear" size="small" (click)="refreshCards()">
       <ion-icon name="refresh-outline"></ion-icon>

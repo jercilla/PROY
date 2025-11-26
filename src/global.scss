@@ -38,6 +38,9 @@
 
 
 
+/* -----------------------
+   TIPOGRAFÍA GLOBAL
+------------------------ */
 body {
   font-family: var(--font-text);
   font-size: var(--font-body);
@@ -50,31 +53,76 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    font-family: var(--font-text);
+  color: var(--color-electric);
+  font-family: var(--font-text);
 }
 
-.button-general {
+/* -----------------------
+   TOOLBAR / HEADERS
+------------------------ */
+ion-toolbar {
+  --background: #ffffff;
+  --color: var(--color-electric);
+}
+
+.header-title {
+  font-family: var(--font-text);
+  text-align: center;
+}
+
+/* -----------------------
+   BOTONES
+------------------------ */
+ion-button {
+    font-family: var(--font-heading);
+    --background: var(--color-electric);
+    --border-radius: 26px;
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+}
+
+ion-back-button{
+  color: var(--color-electric);
+}
+
+/* -----------------------
+   TARJETAS
+------------------------ */
+ion-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--color-tang);
+}
+
+ion-card-title {
+  color: var(--color-electric);
   font-family: var(--font-heading);
-  --background: var(--color-electric);
-  --border-radius: 26px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
+  text-align: center;
 }
 
-ion-label{
-    font-family: var(--font-text);
+ion-card-content {
+  color: var(--color-electric);
+  font-family: var(--font-text);
+  text-align: center;
 }
 
+
+/* -----------------------
+   SWIPER
+------------------------ */
+swiper-container {
+  --swiper-pagination-color: var(--color-electric);
+  --swiper-pagination-bullet-inactive-color: #ccc;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-size: 10px;
+}
+
+/* -----------------------
+   TOAST
+------------------------ */
 .toast-card {
-  font-family: var(--font-heading);          /* Poppins */
+  font-family: var(--font-heading);
   font-weight: 600;
   font-size: 15px;
   letter-spacing: 0.3px;
-}
-
-swiper-container {
-  --swiper-pagination-color: var(--color-electric); /* bullet activo */
-  --swiper-pagination-bullet-inactive-color: #ccc; /* bullet inactivo */
-  --swiper-pagination-bullet-inactive-opacity: 1;
-  --swiper-pagination-bullet-size: 10px; /* opcional */
 }

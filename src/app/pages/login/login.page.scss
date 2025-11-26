@@ -1,141 +1,93 @@
-/* ===========================================
-   CONTENEDOR GENERAL
-=========================================== */
 .login-container {
-  --background: var(--bg-light);
   display: flex;
-  justify-content: flex-start;  /* ← ya no centramos todo */
+  justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
 }
 
-/* Caja que contiene segmento + form */
+
 .center-wrapper {
   width: 90%;
   max-width: 420px;
   margin: auto;
   min-height: 100%;
-  padding: 40px 0;
-
+  padding: var(--space-7) 0;
   display: flex;
   flex-direction: column;
 }
 
-/* ===========================================
-   FORM CENTRADO
-=========================================== */
-.form-center {
-  flex: 1;                       /* ocupa todo el espacio disponible */
-  display: flex;
-  align-items: center;           /* centra verticalmente */
-  justify-content: center;
-}
-
-/* Caja del formulario */
-.form-box {
-  width: 100%;
-}
-
-/* ===========================================
-   SEGMENT
-=========================================== */
-.top-segment {
-  background: transparent;
-  border: 2px solid var(--color-electric);
+ion-segment {
+  background: #f2f2f2;
   border-radius: 12px;
   padding: 4px;
   margin-bottom: 25px;
+
+  ion-segment-button {
+    --indicator-color: transparent;
+
+    --background: transparent;
+    --background-checked: var(--color-electric);
+    --color: var(--color-electric);
+    --color-checked: #fff;
+    
+    transition: background-color .25s ease, color .25s ease;
+  }
+
+  ion-label {
+    font-family: var(--font-text);
+  }
 }
 
-.top-segment ion-segment-button {
-  --indicator-color: transparent;
-
-  --background: transparent;
-  --background-checked: var(--color-electric);
-  --color: var(--color-electric);
-  --color-checked: #fff;
-
-  font-family: var(--font-heading);
-  transition: background-color .25s ease, color .25s ease;
-}
-
-/* ===========================================
-   FORM
-=========================================== */
-.form-box {
-  width: 100%;
-  
-}
-
-/* ===========================================
-   CHECKBOX
-=========================================== */
-.check-box {
+.form-center {
+  flex: 1;
   display: flex;
   align-items: center;
-  margin: 10px 0 20px;
-  gap: 8px;
+  justify-content: center;
+}
+
+
+.form-box {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+
+  ion-item {
+    --background: #f2f2f2;     /* fondo del input */
+    --border-radius: 8px;       /* bordes redondeados */
+    --padding-start: 10px;      /* padding interno */
+    --inner-padding-end: 10px;
+    margin-top: 2px;
+  }
+
+  ion-input {
+    color: var(--color-electric);   /* texto ingresado */
+    font-family: var(--font-text);
+  }
+}
+
+
+
+ion-checkbox {
+  --checkbox-background-checked: var(--color-electric);
+  font-family: var(--font-text);
+  color:var(--color-electric) ;
+
 }
 
 ion-checkbox::part(container) {
   border-radius: 6px;
-  border: 2px solid var(--color-electric);
+  border: 1px solid var(--color-electric);
 }
 
 
-/* ===========================================
-   TEXTO OLVIDAR CONTRASEÑA
-=========================================== */
 .forgot {
   text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-  color: #7a7a7a;
-}
-
-/* ===========================================
-   INPUTS
-=========================================== */
-.input-box {
-  --background: #fff;
-  border-radius: 16px;
-  margin-bottom: 16px;
-  border: 1px solid #ccd2e3;
-  padding: 0 12px;
-  --highlight-height: 0;
-}
-
-/* ===========================================
-   MEDIA QUERIES RESPONSIVE
-=========================================== */
-
-/* Móviles muy pequeños (menos de 360px) */
-@media (max-width: 360px) {
-  .center-wrapper {
-    padding: 10px;
-  }
-
-  ion-input {
-    font-size: 14px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-}
-
-/* Tablets (más de 600px) */
-@media (min-width: 600px) {
-  .center-wrapper {
-    max-width: 480px;
-    padding-top: 60px;
-  }
-
-  h2 {
-    font-size: 28px;
-  }
-
-  .input-box {
-    padding: 8px 14px;
-  }
+  margin-top: var(--space-3);
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
 }

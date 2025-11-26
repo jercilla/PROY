@@ -165,13 +165,26 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     // }, 1500);
   }
 
+  /**
+   * Mostrar toast tipo “card moderno”
+   * color: 'success' | 'warning' | 'danger'
+   */
   async showToast(message: string, color: string) {
+    const iconMap: Record<string, string> = {
+      success: 'checkmark-circle-outline',
+      warning: 'alert-circle-outline',
+      danger: 'close-circle-outline'
+    };
+
     const toast = await this.toastController.create({
       message,
-      duration: 2000,
+      duration: 3000,
+      position: 'top',
       color,
-      position: 'top'
+      icon: iconMap[color] || undefined,
+      cssClass: 'toast-card' // Clase personalizada para estilo moderno
     });
+
     await toast.present();
   }
 }

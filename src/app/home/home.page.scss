@@ -1,34 +1,29 @@
-/* Full background for the screen */
-ion-content {
-  --background: var(--color-electric);
-}
-
-/* Make the wrapper fill the whole screen */
-.wrapper {
+.home-wrapper {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background: var(--color-electric);
 }
 
-/* Top section takes its natural height (42% or whatever you set) */
+
 .top-section {
   height: 42%;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 20px;
+  padding-bottom: var(--space-5);
 }
 
-/* Bottom card expands to fill all remaining space */
+
 .bottom-card {
-  flex: 1;                 /* 👈 THIS IS THE KEY */
-  background: white;
-  border-top-left-radius: 45px;
-  border-top-right-radius: 45px;
-  padding: 40px 28px;
+  flex: 1;
+  background: #fff;
+  border-top-left-radius: var(--r-xl);
+  border-top-right-radius: var(--r-xl);
+  padding: var(--space-7) var(--space-5);
   text-align: center;
   margin-top: -20px;
-  display: flex;           /* Optional: to center its content vertically */
+  display: flex;
   flex-direction: column;
 }
 

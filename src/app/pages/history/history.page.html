@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>History</ion-title>
+    <ion-title class="header-title">History</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <!-- Saludo personalizado -->
-  <div class="header-section">
-    <h2 class="greeting">
+  <div>
+    <h2>
       Hola <em>{{ user?.email }}</em>,<br>
       esto es lo que has publicado hasta ahora:
     </h2>
@@ -23,13 +23,14 @@
 
   <!-- Lista de historial -->
   <ion-list>
-    <ion-card *ngFor="let item of history" class="history-card">
-      <ion-card-content>
-        <ion-text color="medium">
-          <p class="fecha">{{ item.created_at | date:'dd/mm/yy HH:mm' }}</p>
-        </ion-text>
-        <p class="texto">{{ item.text }}</p>
-      </ion-card-content>
-    </ion-card>
+    <div class="date-label" *ngFor="let item of history">
+      {{ item.created_at | date:'EEEE, d \'de\' MMMM \'de\' y' }}
+      
+      <ion-card>
+        <ion-card-content>
+          <p>{{ item.text }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </ion-list>
 </ion-content>

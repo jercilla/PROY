@@ -1,69 +1,63 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Content Creator</ion-title>
+    <ion-title class="header-title">Content Creator</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding new-container">
   <!-- Tarjeta de Tendencia -->
   <ion-card>
     <ion-card-content>
-      <h2>{{ trend?.trend_name }}</h2>
+      {{ trend?.trend_name }}
     </ion-card-content>
   </ion-card>
 
   <!-- Controles de Generación -->
   <div class="controls-section">
     <!-- Control de Longitud -->
-    <div class="control-item">
-      <ion-label>Longitud</ion-label>
-      <ion-range
+    <div>
+      <ion-label class="range-value">Longitud: {{ length }} car.</ion-label>
+      <ion-range class="custom-pin"
         [(ngModel)]="length"
         min="1"
         max="280"
         pin="true"
         [pinFormatter]="pinFormatter">
       </ion-range>
-      <ion-text color="medium">
-        <p class="range-value">{{ length }} car.</p>
-      </ion-text>
     </div>
 
     <!-- Control de Tono -->
-    <div class="control-item">
-      <ion-label>Tono</ion-label>
-      <ion-range
+    <div>
+      <ion-label class="range-value">Tono: {{ getTonLabel() }}</ion-label>
+      <ion-range class="custom-pin"
         [(ngModel)]="tonePercentage"
         min="0"
         max="100">
       </ion-range>
-      <ion-text color="medium">
-        <p class="range-value">{{ getTonLabel() }}</p>
-      </ion-text>
     </div>
 
     <!-- Toggle Hashtag -->
-    <div class="control-item">
-      <ion-item lines="none">
-        <ion-label>Hashtag</ion-label>
-        <ion-toggle [(ngModel)]="hashtags" slot="end"></ion-toggle>
+    <div class="toggle-item-container">
+      <ion-item lines="none" class="range-value">
+        <ion-label class="range-value">Hashtag</ion-label>
+        <ion-toggle [(ngModel)]="hashtags"></ion-toggle>
       </ion-item>
     </div>
 
     <!-- Toggle Emoji -->
-    <div class="control-item">
-      <ion-item lines="none">
-        <ion-label>Emoji</ion-label>
-        <ion-toggle [(ngModel)]="emojis" slot="end"></ion-toggle>
+    <div class="toggle-item-container">
+      <ion-item lines="none" class="range-value">
+        <ion-label class="range-value">Emoji</ion-label>
+        <ion-toggle [(ngModel)]="emojis"></ion-toggle>
       </ion-item>
     </div>
   </div>
 
   <!-- Botón Generar -->
-  <ion-button expand="block" (click)="generar()">
+  <ion-button expand="block" (click)="generar()" class="color-green">
     Generar
   </ion-button>
 

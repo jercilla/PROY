@@ -3,7 +3,7 @@
   <div class="center-wrapper">
 
     <!-- SEGMENTO ARRIBA -->
-    <ion-segment [(ngModel)]="isLogin" class="top-segment">
+    <ion-segment [(ngModel)]="isLogin">
       <ion-segment-button [value]="true">
         <ion-label>Iniciar Sesión</ion-label>
       </ion-segment-button>
@@ -24,9 +24,9 @@
         </h2>
 
         <!-- Email -->
-        <div>
+        <div class="input-group">
           <p>Correo electrónico</p>
-          <ion-item class="input-box">
+          <ion-item>
             <ion-input
               [(ngModel)]="email"
               type="email"
@@ -36,9 +36,9 @@
         </div>
 
         <!-- Contraseña -->
-        <div>
+        <div class="input-group">
           <p>Contraseña</p>
-          <ion-item class="input-box">
+          <ion-item>
             <ion-input
               [(ngModel)]="password"
               type="password"
@@ -51,7 +51,7 @@
         <ng-container *ngIf="isLogin; else registerBlock">
 
           <!-- Botón login -->
-          <ion-button class="button-general" expand="block" (click)="onSubmit()">
+          <ion-button expand="block" (click)="onSubmit()">
             Iniciar Sesión
           </ion-button>
 
@@ -62,12 +62,9 @@
         <!-- REGISTRO -->
         <ng-template #registerBlock>
 
-          <div class="check-box">
-            <ion-checkbox [(ngModel)]="accept"></ion-checkbox>
-            <p>Acepto los términos y condiciones</p>
-          </div>
+            <ion-checkbox [(ngModel)]="accept" label-placement="end">Acepto los términos y condiciones</ion-checkbox>
 
-          <ion-button class="button-general" expand="block" (click)="onSubmit()">
+          <ion-button expand="block" (click)="onSubmit()">
             Registrarse
           </ion-button>
 
