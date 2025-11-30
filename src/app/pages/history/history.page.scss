@@ -1,13 +1,61 @@
-.filter-icon {
-    font-size: 1.5em;
-    cursor: pointer;
-    margin-left: 15px;
-    flex-shrink: 0;
+.sticky {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 100;
+  align-items:center ;
+  padding: 0 16px;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
 }
 
 .date-label {
+  margin-top: 20px;
   color: var(--color-electric);
-  font-family: var(--font-text);
+  font-weight: 600;
+}
+
+/* Estilo para el área de filtros que es sticky */
+.filters {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 16px;
+  z-index: 100;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: left;
+  margin-top: 8px;
+
+  ion-searchbar{
+
+    --color: var(--color-electric);
+
+    --input-font-size: var(--font-sm);
+    --placeholder-font-size: var(--font-sm);
+
+    font-family: var(--font-text);
+  }
 }
 
 
+ion-list{
+  padding: 0 16px;
+}
+
+.date-label {
+  margin-top: 16px;
+  font-size: 1.1rem;
+  color: var(--color-electric);
+  font-weight: 600;
+}
+
+.icon{
+  --background: transparent;
+  --color: var(--color-electric);
+}

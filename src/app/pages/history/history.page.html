@@ -7,30 +7,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- Saludo personalizado -->
-  <div>
+<ion-content>
+  <div class="sticky">
     <h2>
-      Hola <em>{{ user?.email }}</em>,<br>
+      Hola <em>{{ user?.email }}</em>,<br />
       esto es lo que has publicado hasta ahora:
     </h2>
-    <ion-icon
-      name="funnel-outline"
-      class="filter-icon"
-      (click)="abrirFiltros()">
-    </ion-icon>
+
+    <div class="filters ">
+      <ion-searchbar
+        [(ngModel)]="searchTerm"
+        (ionInput)="applyFilters()"
+        placeholder="Buscar">
+      </ion-searchbar>
+
+      <ion-button class ="icon" fill="clear" aria-label="Mostrar calendario"
+                  (click)="toggleCalendar()">
+        <ion-icon name="calendar-number-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button class="icon" (click)="clearDateFilter()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+
+    </div>
+
+    <ion-datetime
+      *ngIf="showCalendar"
+      [(ngModel)]="selectedDate"
+      (ionChange)="applyFilters()"
+      presentation="date">
+    </ion-datetime>
   </div>
 
-  <!-- Lista de historial -->
   <ion-list>
-    <div class="date-label" *ngFor="let item of history">
-      {{ item.created_at | date:'EEEE, d \'de\' MMMM \'de\' y' }}
-      
+    <ng-container *ngFor="let item of filteredItems">
+      <div class="date-label">
+        {{ item.created_at | date:'EEEE d \'de\' MMMM' }}
+      </div>
+
       <ion-card>
         <ion-card-content>
-          <p>{{ item.text }}</p>
+          {{ item.text }}
         </ion-card-content>
       </ion-card>
-    </div>
+    </ng-container>
   </ion-list>
+
 </ion-content>
