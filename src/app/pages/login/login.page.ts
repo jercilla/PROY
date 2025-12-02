@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
+import { IonicModule, LoadingController, ToastController, ModalController } from '@ionic/angular';
 import { AuthService } from '../../core/services/auth';
+import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +20,12 @@ export class LoginPage  implements OnInit {
   isLogin: boolean = true;
   accept: boolean = false;
 
-
   constructor(
     private authService: AuthService,
     private router: Router,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {  }
 
   ngOnInit() {
@@ -117,5 +118,13 @@ export class LoginPage  implements OnInit {
     });
 
     await toast.present();
+  }
+
+  // Abrir modal de recuperación de contraseña
+  async openForgotModal() {
+    const modal = await this.modalController.create({
+      component: ForgotPasswordModalComponent
+    });
+    await modal.present();
   }
 }

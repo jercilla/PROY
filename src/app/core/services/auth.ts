@@ -100,5 +100,33 @@ export class AuthService {
       console.error('Error durante la desconexión:', error.message);
     }
   }
-  
+
+  // Gestionamos la recuperación de contraseña
+  async resetPassword(email: string): Promise<boolean> {
+    const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`
+    });
+
+    if (error) {
+      console.error('Error enviando email de recuperación:', error.message);
+      return false;
+    }
+
+    return true;
+  }
+
+  // Actualizamos la contraseña del usuario
+  async updatePassword(newPassword: string): Promise<boolean> {
+    const { error } = await this.supabase.auth.updateUser({
+      password: newPassword
+    });
+
+    if (error) {
+      console.error('Error actualizando contraseña:', error.message);
+      return false;
+    }
+
+    return true;
+  }
+
 }
