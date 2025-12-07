@@ -35,12 +35,12 @@ export class NewPage implements OnInit {
   get prompt(): string {
     return `Redacta un tuit sobre "${this.trend?.trend_name}" con las siguientes indicaciones:
 - Longitud: ${this.length} caracteres.
-- Tono: ${this.getTonLabel()}.
+- Tono: ${this.getToneLabel()}.
 - Hashtags: ${this.hashtags ? "sí, incluir hashtags relevantes de forma natural." : "no incluir hashtags."}
 - Emojis: ${this.emojis ? "sí, usar emojis apropiados de manera natural." : "no usar emojis."}
 El tuit debe ser claro, informativo y llamativo para la audiencia.`;
   }
- 
+
 
   // Resultado
   resultado: string = '';
@@ -67,11 +67,11 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
           } catch (e) {
           console.error('Error al parsear el JSON de la tendencia:', e);
           this.router.navigate(['/dashboard']);
-          return; 
+          return;
         }
       }
     });
-    
+
     // Leemos la configuración del usuario
     this.userSettingsRepository.userSettings$.subscribe(settings => {
       this.length = settings!.length || 120;
@@ -88,7 +88,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
   }
 
   // Obtener label del tono basado en el valor
-  getTonLabel(): string {
+  getToneLabel(): string {
     if (this.tonePercentage < 25) return 'Muy Informal';
     if (this.tonePercentage < 50) return 'Informal';
     if (this.tonePercentage < 75) return 'Formal';
@@ -144,7 +144,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
       trend_id: this.trend!.id,
       text: this.resultado,
       length: this.length,
-      tone: this.getTonLabel(),
+      tone: this.getToneLabel(),
       emojis: this.emojis,
       hashtag: this.hashtags
     };
