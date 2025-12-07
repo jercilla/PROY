@@ -28,7 +28,7 @@ export class UserSettingsRepository extends SupabaseRepository{
   }
 
   async get() : Promise<void>{
-    
+
     // Obtener el usuario autenticado
     const user = await this.client.auth.getUser();
 
@@ -41,12 +41,12 @@ export class UserSettingsRepository extends SupabaseRepository{
 
     // Guarda el ID de usuario en una variable
     const userId = user.data.user.id;
-    
+
     // Se obtiene una línea, que por políticas será la del propio usuario
     const { data, error } = await this.client
       .from('user_settings')
       .select<string, UserSettings>('*')
-      .eq('id', userId) 
+      .eq('id', userId)
       .single();
 
     // Avisa si no existe y devuelve configuración por defecto
@@ -63,8 +63,44 @@ export class UserSettingsRepository extends SupabaseRepository{
     } else {
         // Si no se encuentra se devuelve la configuración por defecto
         console.log('No se encontró configuración, usando valor por defecto');
-        this.userSettingsSubject.next(this.defaultUserSettings); 
+        this.userSettingsSubject.next(this.defaultUserSettings);
     }
   }
-  
+
+async update(settings: UserSettings): Promise<void> {
+
+
+    // Obtener el usuario autenticado
+    const user = await this.client.auth.getUser();
+
+    // Avisar si no hay usuario
+    if (!user.data.user) {
+        console.warn('Usuario no autenticado. No se puede cargar la configuración.');
+        this.userSettingsSubject.next(null);
+        return;
+    }
+
+    // Guarda el ID de usuario en una variable
+    const userId = user.data.user.id;
+
+    // Actualiza la configuración del usuario
+    const { data, error } = await this.client
+      .from('user_settings')
+      .update(settings)
+      .eq('id', userId)
+      .select<string, UserSettings>()
+      .single();
+
+    // Notifica si hay error
+    if (error) {
+        console.error('Error al guardar/actualizar la configuración:', error);
+        return;
+    }
+
+    // Actualiza el observable si no hay error
+    if (data) {
+        console.log('Configuración de usuario guardada con éxito:', data);
+        this.userSettingsSubject.next(data);
+    }
+  }
 }
