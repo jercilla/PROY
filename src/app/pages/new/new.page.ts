@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Gemini } from 'src/app/core/services/gemini';
 import { HttpClientModule } from '@angular/common/http';
 import { UserSettingsRepository } from 'src/app/core/services/repositories/user-settings';
+import { ToneLabel } from '../../core/models/user-settings.model';
 import { HistoryRepository } from 'src/app/core/services/repositories/history';
 import { Trend } from 'src/app/core/models/trends.model';
 import { CreateHistoryItemDto } from 'src/app/core/models/history.model';
@@ -76,8 +77,9 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     this.userSettingsRepository.userSettings$.subscribe(settings => {
       this.length = settings!.length || 120;
       this.tone = settings!.tone || "Muy informal";
-      this.hashtags = settings!.hashtags || true;
-      this.emojis = settings!.emojis || true;
+      this.getTonePercentage();
+      this.hashtags = settings!.hashtags ?? true;
+      this.emojis = settings!.emojis ?? true;
       console.log('Configuración del usuario aplicada:', settings);
     });
   }
@@ -87,11 +89,19 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
     return `${value} car.`;
   }
 
+  // Obtener el porcentaje del tono según la etiqueta
+  getTonePercentage(): number {
+    if( this.tone === 'Muy Informal') return this.tonePercentage = 0;
+    if( this.tone === 'Informal') return this.tonePercentage = 1;
+    if( this.tone === 'Formal') return this.tonePercentage = 2;
+    return this.tonePercentage = 3;
+  }
+
   // Obtener label del tono basado en el valor
-  getToneLabel(): string {
-    if (this.tonePercentage < 25) return 'Muy Informal';
-    if (this.tonePercentage < 50) return 'Informal';
-    if (this.tonePercentage < 75) return 'Formal';
+  getToneLabel(): ToneLabel {
+    if (this.tonePercentage == 0) return 'Muy Informal';
+    if (this.tonePercentage == 1) return 'Informal';
+    if (this.tonePercentage == 2) return 'Formal';
     return 'Muy Formal';
   }
 
