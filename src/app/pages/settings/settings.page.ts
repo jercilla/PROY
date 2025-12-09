@@ -34,22 +34,31 @@ export class SettingsPage implements OnInit {
     this.userSettingsRepository.userSettings$.subscribe(settings => {
       this.length = settings!.length || 120;
       this.tone = settings!.tone || "Muy informal";
-      this.hashtags = settings!.hashtags || true;
-      this.emojis = settings!.emojis || true;
+      this.getTonePercentage();
+      this.hashtags = settings!.hashtags ?? true;
+      this.emojis = settings!.emojis ?? true;
       console.log('Configuración del usuario aplicada:', settings);
     });
   }
 
+  // Obtener el porcentaje del tono según la etiqueta
+  getTonePercentage(): number {
+    if( this.tone === 'Muy Informal') return this.tonePercentage = 0;
+    if( this.tone === 'Informal') return this.tonePercentage = 1;
+    if( this.tone === 'Formal') return this.tonePercentage = 2;
+    return this.tonePercentage = 3;
+  }
+
   // Obtener label del tono basado en el valor
   getToneLabel(): ToneLabel {
-    if (this.tonePercentage < 25) return 'Muy Informal';
-    if (this.tonePercentage < 50) return 'Informal';
-    if (this.tonePercentage < 75) return 'Formal';
+    if (this.tonePercentage == 0) return 'Muy Informal';
+    if (this.tonePercentage == 1) return 'Informal';
+    if (this.tonePercentage == 2) return 'Formal';
     return 'Muy Formal';
   }
 
   // Guardar cambios
-  saveSettings() {
+  saveSettings(): void{
 
     // Leer el tono
     this.tone = this.getToneLabel();
@@ -62,10 +71,13 @@ export class SettingsPage implements OnInit {
       emojis: this.emojis,
     };
 
-    // Persitir la configuración usando el repositorio
-    this.userSettingsRepository.update(updatedSettings);
+    try { // Persitir la configuración usando el repositorio
+      this.userSettingsRepository.update(updatedSettings);
+      console.log('Configuración guardada:', updatedSettings);
+    } catch (error) { // Avisar si hay error
+      console.error('Error durante el guardado de la configuración:', error);
+    }
 
-    console.log('Configuración guardada:', updatedSettings);
   }
 
   // Formatter para el pin del range de longitud
