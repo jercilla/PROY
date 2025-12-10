@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
 import { UserSettings, ToneLabel } from '../../core/models/user-settings.model';
 import { UserSettingsRepository } from 'src/app/core/services/repositories/user-settings';
+
 
 @Component({
   selector: 'app-settings',
@@ -26,7 +27,8 @@ export class SettingsPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userSettingsRepository : UserSettingsRepository
+    private userSettingsRepository : UserSettingsRepository,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -89,5 +91,14 @@ export class SettingsPage implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  changePassword() {
+    this.router.navigate(['/reset-password'], {
+      queryParams: { returnTo: 'settings' }
+    });
+  }
+
+
+
 
 }

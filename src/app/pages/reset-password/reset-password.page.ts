@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from '../../core/services/auth';
 
@@ -17,17 +17,25 @@ export class ResetPasswordPage implements OnInit {
   newPassword: string = '';
   confirmPassword: string = '';
 
+  showNewPassword = false;
+  showConfirmPassword = false;
+
+  returnTo: string = 'login'; // valor por defecto
+
+
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private loadingController: LoadingController,
     private toastController: ToastController
   ) {}
 
   ngOnInit() {
-    // Supabase detecta automáticamente el token en la URL
-    // y establece la sesión temporal cuando el usuario llega a esta página
-  }
+  this.route.queryParams.subscribe(params => {
+    this.returnTo = params['returnTo'] || 'login';
+  });
+}
 
   async onResetPassword() {
     if (!this.newPassword || !this.confirmPassword) {
@@ -82,4 +90,8 @@ export class ResetPasswordPage implements OnInit {
 
     await toast.present();
   }
+
+  close() {
+  this.router.navigate([`/${this.returnTo}`]);
+}
 }

@@ -1,60 +1,71 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+      <ion-back-button defaultHref="/dashboard"  text=""></ion-back-button>
     </ion-buttons>
-    <ion-title class="header-title">Cofiguración</ion-title>
+    <ion-title class="header-title">Ajustes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding new-container">
-  <!-- Controles de Generación -->
-  <div class="controls-section">
-    <!-- Control de Longitud -->
-    <div>
-      <ion-label class="range-value">Longitud: {{ length }} car.</ion-label>
-      <ion-range class="custom-pin"
-        [(ngModel)]="length"
-        (ionChange)="saveSettings()"
-        min="1"
-        max="280"
-        pin="true"
-        [pinFormatter]="pinFormatter">
-      </ion-range>
-    </div>
+<ion-content fullscreen>
+  <div class="home-wrapper">
+    <!-- TARJETA PRINCIPAL -->
+    <div class="settings-card">
 
-    <!-- Control de Tono -->
-    <div>
-      <ion-label class="range-value">Tono: {{ getToneLabel() }}</ion-label>
-      <ion-range class="custom-pin"
-        [(ngModel)]="tonePercentage"
-        (ionChange)="saveSettings()"
-        min="0"
-        max="3"
-        step="1"
-        snaps="true">
-      </ion-range>
-    </div>
+      <!-- Longitud -->
+      <div>
+        <ion-label class="range-value">Longitud: {{ length }} car.</ion-label>
+        <ion-range class="custom-pin"
+          [(ngModel)]="length"
+          min="1"
+          max="280"
+          pin="true"
+          (ionChange)="saveSettings()">
+        </ion-range>
+      </div>
 
-    <!-- Toggle Hashtag -->
-    <div class="toggle-item-container">
-      <ion-item lines="none" class="range-value">
-        <ion-label class="range-value">Hashtag</ion-label>
+      <!-- Tono -->
+      <div>
+        <ion-label class="range-value">Tono: {{ getToneLabel() }}</ion-label>
+        <ion-range class="custom-pin"
+          [(ngModel)]="tonePercentage"
+          min="0"
+          max="3"
+          pin="true"
+          (ionChange)="saveSettings()">
+        </ion-range>
+      </div>
+
+      <!-- Toggles -->
+      <div class="toggle-item-container">
+        <ion-item lines="none" class="range-value">
+          <ion-label class="range-value">Hashtags</ion-label>
         <ion-toggle [(ngModel)]="hashtags" (ionChange)="saveSettings()"></ion-toggle>
-      </ion-item>
-    </div>
+        </ion-item>
+      </div>
 
-    <!-- Toggle Emoji -->
-    <div class="toggle-item-container">
-      <ion-item lines="none" class="range-value">
-        <ion-label class="range-value">Emoji</ion-label>
-        <ion-toggle [(ngModel)]="emojis" (ionChange)="saveSettings()"></ion-toggle>
-      </ion-item>
+      <div class="toggle-item-container">
+        <ion-item lines="none" class="range-value">
+          <ion-label class="range-value">Emojis</ion-label>
+          <ion-toggle [(ngModel)]="emojis" (ionChange)="saveSettings()"></ion-toggle>
+        </ion-item>
+      </div>
+
+      <!-- Espacio antes del botón -->
+      <div class="spacer"></div>
+
+      <!-- BOTONES -->
+      <ion-button expand="block" (click)="changePassword()">
+        <ion-icon name="key-outline" slot="start"></ion-icon>
+        Cambiar contraseña
+      </ion-button>
+
+      <ion-button class="color-green" expand="block" (click)="logout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Cerrar sesión
+      </ion-button>
+
     </div>
   </div>
 
-  <ion-button expand="block" color="danger" (click)="logout()">
-    <ion-icon slot="start" name="log-out-outline"></ion-icon>
-    Cerrar Sesión
-  </ion-button>
 </ion-content>

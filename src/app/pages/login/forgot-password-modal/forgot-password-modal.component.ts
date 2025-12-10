@@ -8,41 +8,63 @@ import { AuthService } from '../../../core/services/auth';
   selector: 'app-forgot-password-modal',
   template: `
     <ion-content class="forgot-modal">
-      <div class="modal-container">
-        <button class="close-btn" (click)="close()">
-          <ion-icon name="close"></ion-icon>
-        </button>
-        <h2>Forgot Password</h2>
-        <ion-item>
-          <ion-input
-            [(ngModel)]="resetEmail"
-            type="email"
-            placeholder="Enter your account email">
-          </ion-input>
-        </ion-item>
-        <ion-button expand="block" (click)="onResetPassword()">
-          Recuperar Contraseña
-        </ion-button>
+      <div class="full-center">
+        <div class="modal-container">
+          <button class="close-btn" (click)="close()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+
+          <h2>Recupera tu contraseña</h2>
+
+          <ion-item class="input-wrapper">
+            <ion-input
+              [(ngModel)]="resetEmail"
+              type="email"
+              placeholder="ejemplo@email.com">
+            </ion-input>
+          </ion-item>
+
+          <ion-button expand="block" class="action-btn" (click)="onResetPassword()">
+            Recuperar
+          </ion-button>
+        </div>
       </div>
     </ion-content>
   `,
   styles: [`
+
+
     .forgot-modal {
-      --background: transparent;
+      --background: rgba(0,0,0,0.4); /* si quieres fondo oscuro */
+    }
+
+    /* ⭐ Este div fuerza el centrado vertical y horizontal */
+    .full-center {
+      height: 100%;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
+
+
     .modal-container {
       background: var(--ion-background-color, #fff);
       padding: 30px 20px;
-      text-align: center;
-      position: relative;
       border-radius: 16px;
-      margin: 20px;
+      text-align: center;
+
+      /* ⭐ Centrado total */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
       width: 100%;
       max-width: 350px;
+      margin: auto;
+      position: relative;
     }
 
     .close-btn {
@@ -53,26 +75,46 @@ import { AuthService } from '../../../core/services/auth';
       border: none;
       padding: 6px;
       cursor: pointer;
+    }
 
-      ion-icon {
-        font-size: 22px;
-        color: var(--color-electric);
-      }
+    .close-btn ion-icon {
+      font-size: 22px;
+      color: var(--color-electric);
     }
 
     h2 {
       margin: 10px 0 20px;
       font-size: 1.4rem;
       font-weight: 600;
+      width: 100%;
+      text-align: center; /* ⭐ */
     }
 
-    ion-item {
+    .input-wrapper {
+      width: 100%;
+      max-width: 260px;  /* ⭐ centra visualmente todo */
       --background: var(--ion-color-light);
       --border-radius: 8px;
       margin-bottom: 20px;
+
+      ion-item {
+        --background: #f2f2f2;     /* fondo del input */
+        --border-radius: 8px;       /* bordes redondeados */
+        --padding-start: 10px;      /* padding interno */
+        --inner-padding-end: 10px;
+        margin-top: 2px;
+      }
+
+      ion-input {
+        color: var(--color-electric);   /* texto ingresado */
+        font-family: var(--font-text);
+      }
+
     }
 
-    ion-button[expand="block"] {
+    .action-btn {
+      width: 100%;
+      max-width: 260px; /* ⭐ mismo ancho del input */
       margin-top: 10px;
     }
   `],
