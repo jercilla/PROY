@@ -190,6 +190,18 @@ La aplicación se instalará y abrirá automáticamente en tu móvil. Funciona t
 
 #### Opción 2: Generar APK para instalación manual
 
+**Por línea de comandos (recomendado):**
+```bash
+# 1. Compilar y sincronizar
+npm run build && npx cap sync android
+
+# 2. Generar APK debug
+cd android && ./gradlew assembleDebug
+
+# El APK estará en: android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+**Desde Android Studio:**
 ```bash
 # 1. Abrir el proyecto en Android Studio
 npx cap open android
@@ -198,10 +210,11 @@ npx cap open android
 #    - Ve a Build > Build Bundle(s) / APK(s) > Build APK(s)
 #    - Espera a que termine la compilación
 #    - El APK estará en: android/app/build/outputs/apk/debug/app-debug.apk
-
-# 3. Transferir el APK a tu móvil (por cable, email, etc.)
-# 4. Instalar el APK manualmente en tu móvil
 ```
+
+**Transferir el APK al móvil:**
+- Por cable USB
+- Por email o Google Drive
 
 ### Scripts Útiles para Android
 
