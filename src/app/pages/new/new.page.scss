@@ -47,10 +47,14 @@ border: 2px solid #dbe4ff;
 
 
 .action-buttons {
-margin-top: var(--space-3);
-display: flex;
-justify-content: space-between;
-gap: var(--space-2);
+  display: flex;
+  flex-wrap: wrap;     /* 🔑 CLAVE */
+  gap: 10px;
+}
+
+.action-buttons ion-button {
+  flex: 1 1 30%;
+  min-width: 100px;
 }
 
 ion-range.custom-pin {
