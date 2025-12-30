@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { Trend, TrendsResponse } from '../models/trends.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SupabaseClientService } from './supabase-client';
 
 @Injectable({
   providedIn: 'root'
@@ -23,11 +24,8 @@ export class TrendsSupabase {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public loading$ = this.loadingSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.supabase = createClient(
-      'https://xgxcuirwmsyksetfujyr.supabase.co', // URL del proyecto
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhneGN1aXJ3bXN5a3NldGZ1anlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxNzg4MjcsImV4cCI6MjA3Nzc1NDgyN30.TybCDqxkF7hhH164HVzOOAjJJLgzf3JiG8PEFvqZIk8' // Anon/public key
-    );
+  constructor(private http: HttpClient, private supa: SupabaseClientService) {
+    this.supabase = this.supa.client;
 
     // NO auto-carga - solo carga cuando se llama explícitamente desde dashboard
   }

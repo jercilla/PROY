@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { createClient, SupabaseClient, AuthSession } from '@supabase/supabase-js';
+import { SupabaseClientService } from './supabase-client';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,8 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  constructor() {
-    // Inicializamos el cliente Supabase usando las variables de entorno
-    this.supabase = createClient(
-      environment.supabase.url,
-      environment.supabase.anon_key
-    );
+  constructor(private supa: SupabaseClientService) {
+    this.supabase = this.supa.client;
 
     // Comprobamos la sesión inicial al cargar la aplicación
     this.checkInitialAuthStatus();

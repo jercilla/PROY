@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import { SupabaseClientService } from './supabase-client';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,8 @@ export class Gemini {
   // Inicializa Supabase
   private supabase: SupabaseClient;
 
-  constructor(private http: HttpClient) {
-    this.supabase = createClient(
-      'https://xgxcuirwmsyksetfujyr.supabase.co', // URL del proyecto
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhneGN1aXJ3bXN5a3NldGZ1anlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxNzg4MjcsImV4cCI6MjA3Nzc1NDgyN30.TybCDqxkF7hhH164HVzOOAjJJLgzf3JiG8PEFvqZIk8'                      // Anon/public key
-    );
+  constructor(private http: HttpClient, private supa: SupabaseClientService) {
+    this.supabase = this.supa.client;
   }
 
   generateContent(prompt: string): Observable<any> {
