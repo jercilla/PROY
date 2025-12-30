@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content>
   <div class="home-wrapper">
     <!-- TARJETA PRINCIPAL -->
     <div class="settings-card">
@@ -39,14 +39,14 @@
       <!-- Toggles -->
       <div class="toggle-item-container">
         <ion-item lines="none" class="range-value">
-          <ion-label class="range-value">Hashtags</ion-label>
+          <ion-label class="range-value">Hashtags </ion-label>
         <ion-toggle [(ngModel)]="hashtags" (ionChange)="saveSettings()"></ion-toggle>
         </ion-item>
       </div>
 
       <div class="toggle-item-container">
         <ion-item lines="none" class="range-value">
-          <ion-label class="range-value">Emojis</ion-label>
+          <ion-label class="range-value">Emojis </ion-label>
           <ion-toggle [(ngModel)]="emojis" (ionChange)="saveSettings()"></ion-toggle>
         </ion-item>
       </div>

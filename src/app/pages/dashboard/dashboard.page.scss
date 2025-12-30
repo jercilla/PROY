@@ -1,8 +1,20 @@
+.header-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: max-content;
+}
+
+
 .dashboard-container {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   height: 100%;
+  gap: 16px;
 }
 
 ion-toolbar ion-button {
@@ -29,12 +41,13 @@ color: var(--color-electric);
 
 
 .button-row {
-  display: flex;          /* Habilita flexbox */
-  gap: 10px;              /* Espacio entre botones */
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .button-row ion-button {
-  flex: 1;                /* Cada botón ocupa el mismo ancho */
+  flex: 1;
 }
 
 .sync-footer {

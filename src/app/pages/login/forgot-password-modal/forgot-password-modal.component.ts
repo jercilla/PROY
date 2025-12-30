@@ -16,7 +16,7 @@ import { AuthService } from '../../../core/services/auth';
 
           <h2>Recupera tu contraseña</h2>
 
-          <ion-item class="input-wrapper">
+          <ion-item>
             <ion-input
               [(ngModel)]="resetEmail"
               type="email"
@@ -35,7 +35,6 @@ import { AuthService } from '../../../core/services/auth';
 
 
     .forgot-modal {
-      --background: rgba(0,0,0,0.4); /* si quieres fondo oscuro */
     }
 
     /* ⭐ Este div fuerza el centrado vertical y horizontal */
@@ -45,12 +44,13 @@ import { AuthService } from '../../../core/services/auth';
       display: flex;
       align-items: center;
       justify-content: center;
+      background: #7a7a7a;
     }
 
 
 
     .modal-container {
-      background: var(--ion-background-color, #fff);
+      background: white;
       padding: 30px 20px;
       border-radius: 16px;
       text-align: center;
@@ -87,30 +87,24 @@ import { AuthService } from '../../../core/services/auth';
       font-size: 1.4rem;
       font-weight: 600;
       width: 100%;
-      text-align: center; /* ⭐ */
     }
 
-    .input-wrapper {
-      width: 100%;
-      max-width: 260px;  /* ⭐ centra visualmente todo */
-      --background: var(--ion-color-light);
-      --border-radius: 8px;
-      margin-bottom: 20px;
 
-      ion-item {
-        --background: #f2f2f2;     /* fondo del input */
-        --border-radius: 8px;       /* bordes redondeados */
-        --padding-start: 10px;      /* padding interno */
-        --inner-padding-end: 10px;
-        margin-top: 2px;
-      }
-
-      ion-input {
-        color: var(--color-electric);   /* texto ingresado */
-        font-family: var(--font-text);
-      }
-
+    ion-item {
+      --background: #f2f2f2;     /* fondo del input */
+      --border-radius: 8px;       /* bordes redondeados */
+      --padding-start: 10px;      /* padding interno */
+      --inner-padding-end: 10px;
+      margin-top: 2px;
     }
+
+    ion-input {
+      color: var(--color-electric);   /* texto ingresado */
+      font-family: var(--font-text);
+    }
+
+
+
 
     .action-btn {
       width: 100%;

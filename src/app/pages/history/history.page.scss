@@ -1,3 +1,13 @@
+.header-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: max-content;
+}
+
+
 .sticky {
   position: sticky;
   top: 0;
@@ -35,6 +45,7 @@
   ion-searchbar{
 
     --color: var(--color-electric);
+    --background: white;
 
     --input-font-size: var(--font-sm);
     --placeholder-font-size: var(--font-sm);
@@ -46,6 +57,7 @@
 
 ion-list{
   padding: 0 16px;
+  background: white;
 }
 
 .date-label {

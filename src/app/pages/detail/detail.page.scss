@@ -1,60 +1,30 @@
-/* -------- FONDO MODAL -------- */
-.popup-wrapper {
-  --background: rgba(0, 0, 0, 0.35);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-}
-
-/* -------- CARD -------- */
-.popup-card {
-  background: #ffffff;
-  padding: 25px;
-}
-
-/* -------- TITULO -------- */
+/* TITULO */
 .trend-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-electric);
+  line-height: 1.2;
   text-align: center;
+
+  /* evita que el botón empuje el texto */
+  flex: 1;
 }
 
-/* -------- DETALLES -------- */
+
+/* DETALLES */
 .detail-item {
-  margin-bottom: 25px;
-  font-family: var(--font-text);
-
-  .label {
-    margin-bottom: 5px;
-    color: var(--color-tang);
-  }
-
-  .value {
-    margin: 0;
-    color: var(--color-electric);
-  }
+  text-align: left;
 }
 
-/* -------- BOTON CERRAR -------- */
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: none;
-  border: none;
-  padding: 6px;
-  cursor: pointer;
-
-  ion-icon {
-    font-size: 22px;
-    color: var(--color-electric);
-  }
+.label {
+  font-size: 13px;
+  color: var(--color-tang);
+  margin-bottom: 4px;
 }
 
-
+.value {
+  font-size: 15px;
+  color: var(--color-electric);
+  margin: 0;
+}

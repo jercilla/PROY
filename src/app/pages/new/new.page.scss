@@ -1,37 +1,17 @@
+.header-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: max-content;
+}
+
 .controls-section {
   margin-top: var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-}
-
-
-.range-value {
-  font-size: var(--font-sm);
-  margin-top: var(--space-1);
-
-  font-family: var(--font-text);
-  color: var(--color-electric);
-}
-
-
-.toggle-item-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.toggle-item-container ion-item ion-toggle {
-    --track-background: #ddd;
-    --track-background-checked: var(--color-electric);
-
-    --handle-background: var(--color-tang);
-    --handle-background-checked: var(--color-tang);
-}
-
-.color-green{
-  --background: var(--color-neon);
-  color: var(--color-electric);
 }
 
 .resultado-section {
@@ -57,10 +37,3 @@ border: 2px solid #dbe4ff;
   min-width: 100px;
 }
 
-ion-range.custom-pin {
-  --bar-background: #d7e3ff;
-  --bar-background-active: var(--color-electric);
-  --knob-background: var(--color-electric);
-  --pin-background: var(--color-electric);
-  --pin-color: white;
-}

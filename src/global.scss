@@ -41,6 +41,12 @@
 /* -----------------------
    TIPOGRAFÍA GLOBAL
 ------------------------ */
+ion-content {
+  --background: #ffffff;
+  color: var(--color-electric);
+}
+
+
 body {
   font-family: var(--font-text);
   font-size: var(--font-body);
@@ -55,6 +61,22 @@ h1, h2, h3, h4, h5, h6 {
 p {
   color: var(--color-electric);
   font-family: var(--font-text);
+}
+
+/* ======================================================
+   SAFE AREA – evita solape con batería / notch / status bar
+   Funciona en iOS y Android
+   ====================================================== */
+
+ion-content {
+  --padding-top: env(safe-area-inset-top);
+  --padding-bottom: env(safe-area-inset-bottom);
+  --padding-start: env(safe-area-inset-left);
+  --padding-end: env(safe-area-inset-right);
+}
+
+ion-header {
+  padding-top: env(safe-area-inset-top);
 }
 
 /* -----------------------
@@ -76,6 +98,7 @@ ion-toolbar {
 ion-button {
     font-family: var(--font-heading);
     --background: var(--color-electric);
+    --color: #ffffff;
     --border-radius: 26px;
     --padding-top: 14px;
     --padding-bottom: 14px;
@@ -117,12 +140,122 @@ swiper-container {
   --swiper-pagination-bullet-size: 10px;
 }
 
-/* -----------------------
-   TOAST
------------------------- */
-.toast-card {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.3px;
+
+/* ===== Modal genérico (reutilizado) ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background:#7a7a7a;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px; /* evita bordes en móviles pequeños */
+}
+
+.popup-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px 22px;
+
+  width: 100%;
+  max-width: 360px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between; /* X */
+  align-items: center;            /* Y */
+  gap: 12px;
+}
+
+.close-btn {
+  --padding-start: 0;
+  --padding-end: 0;
+  min-width: auto;
+  height: 36px;
+  --background: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn ion-icon {
+  font-size: 22px;
+  color: var(--color-electric);
+}
+
+/* ===== INPUTS CONSISTENTES ===== */
+ion-input {
+  --background: #fff;
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+/* ===== RANGE / TOOGLE ===== */
+.range-value {
+
+  font-size: var(--font-sm);
+  margin-top: var(--space-1);
+
+  font-family: var(--font-text);
+  color: var(--color-electric);
+}
+
+.toggle-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  --background: #ffffff;
+
+}
+
+.toggle-item-container ion-item {
+  --background: #ffffff;
+  --color: var(--color-electric);
+
+  border-radius: 12px;
+}
+
+.toggle-item-container ion-item ion-toggle {
+    padding-left: 10px;
+    --track-background: #ddd;
+    --track-background-checked: var(--color-electric);
+
+    --handle-background: var(--color-tang);
+    --handle-background-checked: var(--color-tang);
+}
+
+.color-green{
+  --background: var(--color-neon);
+  color: var(--color-electric);
+}
+
+ion-range.custom-pin {
+  --pin-background: var(--ion-color-primary);
+  --pin-color: #fff;
+}
+
+ion-range.custom-pin {
+  --bar-background: #d7e3ff;
+  --bar-background-active: var(--color-electric);
+  --knob-background: var(--color-electric);
+  --pin-background: var(--color-electric);
+  --pin-color: white;
+}
+
+/* ===== LAYOUT WRAPPER ===== */
+.home-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-electric);
+
 }

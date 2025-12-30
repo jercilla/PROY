@@ -1,37 +1,41 @@
-<div class="popup-wrapper">
+<ion-content>
 
-  <!-- Card Popup -->
-  <div class="popup-card">
+  <div class="modal-overlay">
+    <div class="popup-card">
 
-    <!-- Botón cerrar -->
-    <button class="close-btn" (click)="closeModal()">
-      <ion-icon name="close"></ion-icon>
-    </button>
+      <div class="card-header">
+        <h1 class="trend-title">
+          {{ trend.trend_name }}
+        </h1>
 
-    <!-- Título -->
-    <h1 class="trend-title">{{ trend.trend_name }}</h1>
+        <ion-button
+          class="close-btn"
+          fill="clear"
+          (click)="closeModal()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </div>
 
-    <!-- Items -->
-    <div class="detail-item">
-      <p class="label">Categoría:</p>
-      <p class="value">{{ trend.category }}</p>
+      <div class="detail-item">
+        <p class="label">Categoria</p>
+        <p class="value">{{ trend.category }}</p>
+      </div>
+
+      <div class="detail-item">
+        <p class="label">Número de Publicaciones</p>
+        <p class="value">{{ trend.post_count }}</p>
+      </div>
+
+      <div class="detail-item">
+        <p class="label">Trending desde</p>
+        <p class="value">{{ trend.trending_since }}</p>
+      </div>
+
+      <ion-button expand="block" class="button-general" (click)="crearContenido()">
+        Crear Contenido
+      </ion-button>
+
     </div>
-
-    <div class="detail-item">
-      <p class="label">Número de Publicaciones:</p>
-      <p class="value">{{ trend.post_count }}</p>
-    </div>
-
-    <div class="detail-item">
-      <p class="label">Trending desde:</p>
-      <p class="value">{{ trend.trending_since }}</p>
-    </div>
-
-    <!-- Botón Crear Contenido -->
-    <ion-button class="button-general" expand="block" (click)="crearContenido()">
-      Crear Contenido
-    </ion-button>
-
   </div>
 
-</div>
+</ion-content>
