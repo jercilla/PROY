@@ -44,11 +44,6 @@ export class DashboardPage implements OnInit {
   slideOpts = {
   slidesPerView: 1,
   spaceBetween: 0,
-  pagination: {
-    clickable: true,
-    type: 'bullets',  // Can be 'bullets', 'fraction', or 'progressbar'
-    dynamicBullets: true,  // Optional: Makes bullets smaller if there are many slides
-  },
   };
 
 

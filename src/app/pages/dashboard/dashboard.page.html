@@ -34,19 +34,20 @@
   </div>
 
   <div>
-    <!-- SWIPER -->
+
     <swiper-container
       *ngIf="!isLoading && trendingNews.length > 0"
       [slidesPerView]="slideOpts.slidesPerView"
       [spaceBetween]="slideOpts.spaceBetween"
-      [pagination]="slideOpts.pagination"
+      [pagination]="{ clickable: true }"
       (swiperslidechange)="onSlideChange($event)"
+      class="mySwiper"
     >
       <swiper-slide *ngFor="let news of trendingNews">
         <app-trend-card [news]="news"></app-trend-card>
       </swiper-slide>
-
     </swiper-container>
+
 
     <!-- BOTONES -->
     <div class="button-row">

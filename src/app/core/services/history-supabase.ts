@@ -35,7 +35,7 @@ export class HistorySupabase {
     // Refrescamos la tabla después de guardar
     await this.leer();
 
-    return { data, error: null };
+    return { data, error };
   }
 
   async leer() : Promise<void>{
