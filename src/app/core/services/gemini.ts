@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
-import { SupabaseClient, createClient } from '@supabase/supabase-js';
-import { SupabaseClientService } from './supabase-client';
+import { catchError } from 'rxjs/operators';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseRepository } from './repositories/supabase';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class Gemini {
   // Inicializa Supabase
   private supabase: SupabaseClient;
 
-  constructor(private http: HttpClient, private supa: SupabaseClientService) {
+  constructor(private http: HttpClient, private supa: SupabaseRepository) {
     this.supabase = this.supa.client;
   }
 
