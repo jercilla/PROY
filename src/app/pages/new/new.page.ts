@@ -116,6 +116,7 @@ El tuit debe ser claro, informativo y llamativo para la audiencia.`;
       },
       error: (err) => {
         console.error('Error:', err);
+        this.showToast('Error al generar el texto', 'danger');
         this.resultado = 'Ocurrió un error al generar el contenido.';
       }
     });
