@@ -10,7 +10,7 @@ import type { User } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/core/services/auth';
 import { register } from 'swiper/element/bundle';
 import { DetailPage } from '../detail/detail.page';
-import { interval, Subscription, timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 register();
 
