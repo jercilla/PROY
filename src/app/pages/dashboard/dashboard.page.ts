@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import type { User } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/core/services/auth';
 import { register } from 'swiper/element/bundle';
 import { DetailPage } from '../detail/detail.page';
+import { interval, Subscription, timer } from 'rxjs';
 
 register();
 
@@ -22,11 +23,14 @@ register();
   providers: [TrendRepository],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, OnDestroy {
 
   // Definir variables de fecha
   currentDate: string = '';
   lastUpdate: string = '';
+
+  // Definir variable para manejar la suscripción del reloj
+  private clockSubscription?: Subscription;
 
   // Definir variable para el usuario
   user? : User | null;
@@ -55,7 +59,7 @@ export class DashboardPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.updateCurrentDate();
+    this.startClock();
     this.updateLastUpdateTime();
 
     // Leer el usuario actual
@@ -83,24 +87,42 @@ export class DashboardPage implements OnInit {
     this.trendRepository.getAll();
   }
 
+  ngOnDestroy() {
+    this.clockSubscription?.unsubscribe();
+  }
+
+  // Inicia un reloj que se sincroniza con el cambio de segundo del sistema
+  startClock() {
+    const now = new Date();
+    const msUntilNextSecond = 1000 - now.getMilliseconds();
+
+    this.clockSubscription = timer(msUntilNextSecond, 1000).subscribe(() => {
+      this.updateCurrentDate();
+    });
+
+    this.updateCurrentDate();
+  }
+
   updateCurrentDate() {
     const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    this.currentDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+    this.currentDate = this.formatDateTime(now);
   }
 
   updateLastUpdateTime() {
     const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    this.lastUpdate = `${day}/${month}/${year} ${hours}:${minutes}`;
+    this.lastUpdate = this.formatDateTime(now);
+  }
+
+  // Helper para formatear fechas
+  private formatDateTime(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
   }
 
   goToSettings() {
